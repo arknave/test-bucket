@@ -8,7 +8,7 @@ app.set('view options', {layout: false});
 app.use(express.logger());
 
 app.get('/', function(request, response) {
-  response.render('index.jade'); 
+  response.render('index.jade', {team: "Moscow 5"}); 
 });
 
 var port = process.env.PORT || 5000;

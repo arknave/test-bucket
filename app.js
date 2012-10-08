@@ -1,6 +1,6 @@
 var express = require('express');
 
-var app = express.createServer(express.logger());
+var app = express();
 
 require('jade');
 app.set('view engine', 'jade');
@@ -8,7 +8,7 @@ app.set('view options', {layout: false});
 app.use(express.logger());
 
 app.get('/', function(request, response) {
-  response.render('index.jade', {team: "Moscow 5"}); 
+  response.render('index.jade', {team: "Moscow 5", losers: "TSM"}); 
 });
 
 var port = process.env.PORT || 5000;

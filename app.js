@@ -7,7 +7,7 @@ app.set('view engine', 'jade');
 app.set('view options', {layout: false});
 app.use(express.logger());
 
-app.get('/', function(request, response) {
+app.get('/', function(req, res) {
   response.render('index.jade', {team: "Moscow 5", losers: "TSM"}); 
 });
 

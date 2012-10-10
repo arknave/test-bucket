@@ -30,3 +30,52 @@ var port = process.env.PORT || 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
+
+var dropbox = document.getElementById("dropbox")
+
+dropbox.addEventListener("dragenter", dragEnter, false);
+dropbox.addEventListener("dragexit", dragExit, false);
+dropbox.addEventListener("dragover", dragOver, false);
+dropbox.addEventListener("drop", drop, false);
+
+function dragEnter(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+}
+
+function dragExit(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+}
+
+function dragOver(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+}
+
+function drop(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+
+  var files = evt.dataTransfer.files;
+  var count = files.length;
+
+  if(cout &gt; 0)
+	handleFiles(files);
+}
+
+function handleFiles(files) {
+  var file = files[0];
+
+  document.getElementById("droplabel").innerHTML = "Processing " + file.name;
+
+  var reader = new FileReader();
+
+  reader.onload = handleReaderLoad;
+  reader.readAsDataURl(file);
+}
+
+function handleReaderLoad(evt) {
+  var img = document.getElementById("preview");
+  img.src = evt.target.result;
+}

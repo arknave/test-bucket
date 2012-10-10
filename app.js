@@ -8,10 +8,15 @@ app.set('view options', {layout: false});
 app.use(express.logger());
 
 app.get('/', function(req, res) {
-  response.render('index.jade', {team: "Moscow 5", losers: "TSM"}); 
+  res.render('index.jade', {team: "Moscow 5", losers: "TSM"}); 
+});
+
+app.get('/:url', function(req, res) {
+  return res.render('index.jade', {team:"Moscow 5", losers: req.params.url});
 });
 
 var port = process.env.PORT || 5000;
+
 app.listen(port, function() {
   console.log("Listening on " + port);
 });

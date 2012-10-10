@@ -5,6 +5,8 @@ require('jade');
 app.set('view engine', 'jade');
 app.set('view options', {layout: false});
 app.use(express.logger());
+app.use(express.bodyParser({uploadDir:'./uploads'}));
+
 
 var exec = require('child_process').exec, child;
 

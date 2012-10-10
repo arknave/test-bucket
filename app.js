@@ -8,15 +8,17 @@ app.use(express.logger());
 
 var exec = require('child_process').exec, child;
 
-var text;
+var text, err;
 
-child = exec('abiword --version', function(error, stdout, stderr){
+child = exec('python --version', function(error, stdout, stderr){
   console.log('stdout: ' + stdout);
+  console.log('stderr: ' + stderr);
   text = stdout;
+  err = stderr;
 });
 
 app.get('/', function(req, res) {
-  return res.render('index.jade', {team: "Moscow 5", losers: "TSM", text: text}); 
+  return res.render('index.jade', {team: "Moscow 5", losers: "TSM", text: " out "+text+" err "+err}); 
 });
 
 app.get('/:url', function(req, res) {

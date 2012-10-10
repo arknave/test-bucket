@@ -10,7 +10,7 @@ var exec = require('child_process').exec, child;
 
 var text;
 
-child = exec('ls', function(error, stdout, stderr){
+child = exec('ls /', function(error, stdout, stderr){
   console.log('stdout: ' + stdout);
   text = stdout;
 });

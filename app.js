@@ -12,7 +12,7 @@ var exec = require('child_process').exec, child;
 
 var text, err;
 
-child = exec('uname -a', function(error, stdout, stderr){
+child = exec('pwd' function(error, stdout, stderr){
   console.log('stdout: ' + stdout);
   console.log('stderr: ' + stderr);
   text = stdout;

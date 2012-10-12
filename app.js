@@ -8,17 +8,17 @@ app.use(express.logger());
 app.use(express.bodyParser({uploadDir:'./uploads'}));
 
 
-//var exec = require('child_process').exec, child;
+var exec = require('child_process').exec, child;
 
 var text, err;
 
-/*child = exec('pwd' function(error, stdout, stderr){
+child = exec('pwd' function(error, stdout, stderr){
   console.log('stdout: ' + stdout);
   console.log('stderr: ' + stderr);
   text = stdout;
   err = stderr;
 });
-*/
+
 app.get('/', function(req, res) {
   return res.render('index.jade', {team: "Moscow 5", losers: "TSM", text: " out "+text+" err "+err}); 
 });

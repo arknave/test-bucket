@@ -12,7 +12,7 @@ var exec = require('child_process').exec, child;
 
 var text, err;
 
-child = exec('pwd' function(error, stdout, stderr){
+child = exec('pwd', function(error, stdout, stderr){
   console.log('stdout: ' + stdout);
   console.log('stderr: ' + stderr);
   text = stdout;
@@ -38,7 +38,4 @@ app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
-app.post('/upload', function(req,res) {
-     console.log(req.files.uploadfile);
-     console.log(req.files.uploadfile.name);
 

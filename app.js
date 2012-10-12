@@ -23,6 +23,11 @@ app.get('/', function(req, res) {
   return res.render('index.jade', {team: "Moscow 5", losers: "TSM", text: " out "+text+" err "+err}); 
 });
 
+app.post('/upload', function(req,res) {
+     console.log(req.files.uploadfile);
+     console.log(req.files.uploadfile.name);
+});
+
 app.get('/:url', function(req, res) {
   return res.render('index.jade', {team:"Moscow 5", losers: req.params.url, text: 'guhguh'});
 });

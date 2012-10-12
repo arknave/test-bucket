@@ -32,3 +32,8 @@ var port = process.env.PORT || 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
+
+app.post('/upload', function(req,res) {
+     console.log(req.files.uploadfile);
+     console.log(req.files.uploadfile.name);
+

@@ -19,9 +19,9 @@ child = exec('pwd', function(error, stdout, stderr){
   err = stderr;
 });
 
-app.get('/', function(req, res) {
+/* app.get('/', function(req, res) {
   return res.render('index.jade', {team: "Moscow 5", losers: "TSM", text: " out "+text+" err "+err}); 
-});
+}); 
 
 app.post('/upload', function(req,res) {
      console.log(req.files.uploadfile);
@@ -30,6 +30,16 @@ app.post('/upload', function(req,res) {
 
 app.get('/:url', function(req, res) {
   return res.render('index.jade', {team:"Moscow 5", losers: req.params.url, text: 'guhguh'});
+});  */
+
+app.get('/', function(req, res){
+  res.render('index.jade');
+});
+
+app.post('/', function(req, res, next){
+  // the uploaded file can be found as `req.files.image` and the
+  // title field as `req.body.title`
+  res.send(req.body.title);
 });
 
 var port = process.env.PORT || 5000;

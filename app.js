@@ -40,6 +40,7 @@ app.post('/', function(req, res, next){
   // the uploaded file can be found as `req.files.image` and the
   // title field as `req.body.title`
   res.send(req.body.title);
+  res.redirect('/');
 });
 
 var port = process.env.PORT || 5000;

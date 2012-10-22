@@ -22,7 +22,7 @@ child = exec('pwd', function(error, stdout, stderr){
 
 app.get('/:url', function(req, res) {
   return res.render('index.jade', {team:"Moscow 5", losers: req.params.url, text: 'guhguh'});
-});  */
+});
 
 app.get('/', function(req, res){
   res.render('index.jade');

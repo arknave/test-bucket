@@ -1,0 +1,57 @@
+info it worked if it ends with ok
+verbose cli [ 'nodejs', '/usr/bin/npm', 'install', 'redis' ]
+info using npm@1.1.19
+info using node@v0.6.18
+verbose config file /home/arnav/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/lib/nodejs/npm/npmrc
+verbose caching /home/arnav/Code/Websites/test-bucket/package.json
+verbose loadDefaults node-example@0.0.1
+verbose caching /home/arnav/Code/Websites/test-bucket/node_modules/node/package.json
+verbose loadDefaults node@0.0.0
+verbose caching /home/arnav/Code/Websites/test-bucket/node_modules/jquery/package.json
+verbose caching /home/arnav/Code/Websites/test-bucket/node_modules/stylus/package.json
+verbose loadDefaults stylus@0.29.0
+verbose caching /home/arnav/Code/Websites/test-bucket/node_modules/jade/package.json
+verbose loadDefaults jade@0.27.5
+verbose caching /home/arnav/Code/Websites/test-bucket/node_modules/formidable/package.json
+verbose loadDefaults formidable@1.0.11
+verbose caching /home/arnav/Code/Websites/test-bucket/node_modules/express/package.json
+verbose loadDefaults express@3.0.0rc4
+verbose caching /home/arnav/Code/Websites/test-bucket/node_modules/npm/package.json
+verbose loadDefaults npm@1.1.62
+verbose from cache /home/arnav/Code/Websites/test-bucket/package.json
+verbose readDependencies: using package.json deps
+verbose cache add [ 'redis', null ]
+silly cache add: name, spec, args [ undefined, 'redis', [ 'redis', null ] ]
+verbose parsed url { pathname: 'redis', path: 'redis', href: 'redis' }
+verbose addNamed [ 'redis', '' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'redis', '', false ]
+verbose raw, before any munging redis
+verbose url resolving [ 'https://registry.npmjs.org/', './redis' ]
+verbose url resolved https://registry.npmjs.org/redis
+http GET https://registry.npmjs.org/redis
+ERR! Error: socket hang up
+ERR!     at SecurePair.error (tls.js:802:15)
+ERR!     at EncryptedStream._done (tls.js:283:17)
+ERR!     at EncryptedStream._pull (tls.js:426:12)
+ERR!     at SecurePair.cycle (tls.js:720:20)
+ERR!     at EncryptedStream.end (tls.js:256:13)
+ERR!     at Socket.onend (stream.js:80:10)
+ERR!     at Socket.emit (events.js:88:20)
+ERR!     at TCP.onread (net.js:388:51)
+ERR! You may report this log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Linux 3.6.2-4.fc17.i686
+ERR! command "nodejs" "/usr/bin/npm" "install" "redis"
+ERR! cwd /home/arnav/Code/Websites/test-bucket
+ERR! node -v v0.6.18
+ERR! npm -v 1.1.19
+ERR! code ECONNRESET
+ERR! message socket hang up
+ERR! errno {}
+verbose exit [ 1, true ]

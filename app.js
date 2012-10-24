@@ -1,8 +1,7 @@
 var express = require('express');
 var http = require('http');
 var app = express();
-var redis = require('redis');
-var db = redis.createClient();
+var db = {'arnav': 'sastry', 'ying': 'roo'};
 
 require('jade');
 app.set('view engine', 'jade');
@@ -21,9 +20,6 @@ child = exec('pwd', function(error, stdout, stderr){
   text = stdout;
   err = stderr;
 });
-
-db.sadd('arnav', 'sastry');
-db.sadd('ling', 'yiu');
 
 app.get('/', function(req, res){
   res.render('index.jade');
@@ -48,10 +44,7 @@ app.listen(port, function() {
 
 app.get('/search/:query?', function(req,res) {
   var query = req.params.query;
-  db.smembers(guery, function(err, vals){
-    if (err) return res.send(500);
-    res.send(vals);
-  });
+  return db.query;
 });
 
 

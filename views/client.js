@@ -1,7 +1,9 @@
+console.log("TESTES");
 var search = document.querySelector('[type=search]');
 var code = document.querySelector('pre');
 
 search.addEventListener('keyup', function(){
+  code.textContent = "yoro";
   var xhr = new XMLHttpRequest;
   xhr.open('GET', '/search/' + search.value, true);
   xhr.onreadystatechange = function(){

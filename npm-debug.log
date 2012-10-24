@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 info it worked if it ends with ok
 verbose cli [ 'nodejs', '/usr/bin/npm', 'install', 'redis' ]
 info using npm@1.1.19
@@ -55,3 +56,63 @@ ERR! code ECONNRESET
 ERR! message socket hang up
 ERR! errno {}
 verbose exit [ 1, true ]
+=======
+0 info it worked if it ends with ok
+1 verbose cli [ 'nodejs', '/usr/bin/npm', 'install', 'redis' ]
+2 info using npm@1.1.62
+3 info using node@v0.8.11
+4 verbose read json /home/compsci/Documents/test-bucket/package.json
+5 warn package.json node-example@0.0.1 No README.md file found!
+6 verbose read json /home/compsci/Documents/test-bucket/node_modules/formidable/package.json
+7 verbose read json /home/compsci/Documents/test-bucket/node_modules/npm/package.json
+8 verbose read json /home/compsci/Documents/test-bucket/node_modules/express/package.json
+9 verbose read json /home/compsci/Documents/test-bucket/node_modules/jquery/package.json
+10 verbose read json /home/compsci/Documents/test-bucket/node_modules/node/package.json
+11 verbose read json /home/compsci/Documents/test-bucket/node_modules/jade/package.json
+12 verbose read json /home/compsci/Documents/test-bucket/node_modules/stylus/package.json
+13 verbose from cache /home/compsci/Documents/test-bucket/package.json
+14 verbose readDependencies using package.json deps
+15 verbose cache add [ 'redis', null ]
+16 silly cache add name=undefined spec="redis" args=["redis",null]
+17 verbose parsed url { pathname: 'redis', path: 'redis', href: 'redis' }
+18 silly lockFile b840fc02-redis redis
+19 verbose lock redis /home/compsci/.npm/b840fc02-redis.lock
+20 silly lockFile b840fc02-redis redis
+21 verbose addNamed [ 'redis', '' ]
+22 verbose addNamed [ null, '' ]
+23 silly lockFile fb3bbc27-redis redis@
+24 verbose lock redis@ /home/compsci/.npm/fb3bbc27-redis.lock
+25 silly addNameRange { name: 'redis', range: '', hasData: false }
+26 verbose url raw redis
+27 verbose url resolving [ 'https://registry.npmjs.org/', './redis' ]
+28 verbose url resolved https://registry.npmjs.org/redis
+29 info trying registry request attempt 1 at 15:20:41
+30 http GET https://registry.npmjs.org/redis
+31 info retry will retry, error on last attempt: Error: socket hang up
+32 info trying registry request attempt 2 at 15:20:51
+33 http GET https://registry.npmjs.org/redis
+34 info retry will retry, error on last attempt: Error: socket hang up
+35 info trying registry request attempt 3 at 15:21:51
+36 http GET https://registry.npmjs.org/redis
+37 silly lockFile fb3bbc27-redis redis@
+38 error Error: socket hang up
+38 error     at SecurePair.error (tls.js:948:15)
+38 error     at EncryptedStream.CryptoStream._done (tls.js:432:17)
+38 error     at EncryptedStream.CryptoStream._pull (tls.js:577:12)
+38 error     at SecurePair.cycle (tls.js:866:20)
+38 error     at EncryptedStream.CryptoStream.end (tls.js:405:13)
+38 error     at Socket.onend (stream.js:66:10)
+38 error     at Socket.EventEmitter.emit (events.js:123:20)
+38 error     at TCP.onread (net.js:417:51)
+39 error If you need help, you may report this log at:
+39 error     <http://github.com/isaacs/npm/issues>
+39 error or email it to:
+39 error     <npm-@googlegroups.com>
+40 error System Linux 2.6.32-43-generic
+41 error command "nodejs" "/usr/bin/npm" "install" "redis"
+42 error cwd /home/compsci/Documents/test-bucket
+43 error node -v v0.8.11
+44 error npm -v 1.1.62
+45 error code ECONNRESET
+46 verbose exit [ 1, true ]
+>>>>>>> 86bd76c68689017f1621327fabeb5adc875492e1

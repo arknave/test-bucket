@@ -35,6 +35,10 @@ app.get('/search/:query?', function(req,res) {
   return db.query;
 });
 
+app.get('/client.js', function(req,res){
+  res.sendfile(__dirname + '/client.js');
+});
+
 var port = process.env.PORT || 5000;
 
 app.listen(port, function() {

@@ -23,24 +23,11 @@ child = exec('pwd', function(error, stdout, stderr){
 });
 
 app.get('/', function(req, res){
-  res.render('index.jade');
+  res.render('index');
 });
 
 app.get('/search/', function(req,res){
-  res.render('search.jade');
-});
-
-app.post('/', function(req, res, next){
-  // the uploaded file can be found as `req.files.image` and the
-  // title field as `req.body.title`
-  res.send(req.body.title);
-  res.redirect('/');
-});
-
-var port = process.env.PORT || 5000;
-
-app.listen(port, function() {
-  console.log("Listening on " + port);
+  res.render('search', { scripts: ['client.js']});
 });
 
 app.get('/search/:query?', function(req,res) {
@@ -48,5 +35,8 @@ app.get('/search/:query?', function(req,res) {
   return db.query;
 });
 
+var port = process.env.PORT || 5000;
 
-
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});

@@ -1,10 +1,9 @@
 var express = require('express');
 var http = require('http');
 var stylus = require('stylus');
-var app = express();
 var mongoose = require('mongoose');
 var db = mongoose.createConnection('localhost', 'test');
-
+var app = express();
 
 require('jade');
 app.set('view engine', 'jade');
@@ -56,6 +55,7 @@ var bonus = db.model('bonus',bonusSchema);
 child = exec('pwd', function(error, stdout, stderr){
   console.log('stdout: ' + stdout);
   console.log('stderr: ' + stderr);
+  console.log('-------------------------------------');
   text = stdout;
   err = stderr;
 });

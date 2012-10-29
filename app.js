@@ -2,7 +2,9 @@ var express = require('express');
 var http = require('http');
 var stylus = require('stylus');
 var app = express();
-var db = {'arnav': 'sastry', 'ying': 'roo'};
+var mongoose = require('mongoose');
+var db = mongoose.createConnection('localhost', 'test');
+
 
 require('jade');
 app.set('view engine', 'jade');
@@ -10,6 +12,10 @@ app.set('view options', {layout: false});
 app.use(express.logger());
 app.use(express.bodyParser({uploadDir:'./uploads'}));
 
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  console.log("mission accomplished");
+});
 
 var exec = require('child_process').exec, child;
 

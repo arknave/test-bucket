@@ -21,6 +21,38 @@ var exec = require('child_process').exec, child;
 
 var text, err;
 
+var tournamentSchema = new mongoose.Schema({
+  name: String,
+  year: Number,
+  difficulty: Number
+})
+var tournament = db.model('tournament', tournamentSchema);
+
+var tossupSchema = new mongoose.Schema({
+  subject: String, 
+  idTournament: Number,
+  packetName: String, 
+  tossupNumber: Number,
+  tossupText: String,
+  tossupAnswer: String
+})
+var tossup = db.model('tossup',tossupSchema);
+
+var bonusSchema = new mongoose.Schema({
+  subject: String, 
+  idTournament: Number,
+  packetName: String, 
+  bonusNumber: Number,
+  bonusPreamble: String,
+  bonusQuestion1: String, 
+  bonusAnswer1: String, 
+  bonusQuestion2: String, 
+  bonusAnswer2: String,
+  bonusQuestion3: String, 
+  bonusAnswer3: String
+})
+var bonus = db.model('bonus',bonusSchema); 
+ 
 child = exec('pwd', function(error, stdout, stderr){
   console.log('stdout: ' + stdout);
   console.log('stderr: ' + stderr);

@@ -20,14 +20,6 @@ var exec = require('child_process').exec, child;
 
 var text, err;
 
-child = exec('pwd', function(error, stdout, stderr){
-  console.log('stdout: ' + stdout);
-  console.log('stderr: ' + stderr);
-  console.log('-------------------------------------');
-  text = stdout;
-  err = stderr;
-});
-
 app.get('/', function(req, res){
   res.render('index');
 });

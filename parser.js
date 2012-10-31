@@ -5,13 +5,24 @@ var parse = function(filename, encoding){
   fs.readFile(filename, encoding, function(err, data){
     if (err) throw err;
     lines = data.split("\n");
+    var bonus = false;
     for(line in lines){
       var cur = lines[line];
-      var isBonus = cur.match(/bonuse?s?/i);
+      var isBonus = cur.match(/bonuse?s?/gi);
       if(isBonus!=null && isBonus!= undefined){
-
-        console.log(isBonus);
+        bonus = true;
       }
+      if(!bonus){
+         var tossup = cur.match(/(\d{1,2})\.\s?([\s\S]+)/i);
+         var answer = cur.match(/ANSWER:([\s\S]+)/i);
+         if(tossup !=null && tossup != undefined){
+           console.log(tossup);
+         }
+         if(answer !=null && answer != undefined){
+           console.log(answer);
+         }
+      }
+      
     } 
   });
 }

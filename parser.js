@@ -12,29 +12,35 @@ var parse = function(filename, encoding){
       if(isBonus!=null && isBonus!= undefined){
         bonus = true;
       }
-      if(!bonus){
-         var tossup = cur.match(/(\d{1,2})\.\s?([\s\S]+)/i);
-         var answer = cur.match(/ANSWER:([\s\S]+)/i);
-         if(tossup !=null && tossup != undefined){
-           console.log(tossup);
-         }
-         if(answer !=null && answer != undefined){
-           console.log(answer);
-         }
+      var tossup = cur.match(/(\d{1,2})\.\s?([\s\S]+)/i);
+      var answer = cur.match(/ANSWER:\s?([\s\S]+)/i);
+      var bonuspart = cur.match(/\[10\]\s?([\s\S]+)/i);
+      if(tossup !=null && tossup != undefined){
+        console.log(tossup[1]+" "+tossup[2]);
       }
-      
+      if(answer !=null && answer != undefined){
+        console.log(answer[1]);
+      }
+      if(bonus){
+        if(bonuspart !=null && bonuspart != undefined){
+          console.log(bonuspart[1]);
+        }
+      } 
     } 
   });
 }
+var convert = function(path) {
+  fs.readdir(__dirname + path , function(err, files){
+    console.log(files);
+    for(file in files){
+      var cur = files[file];
+      var convert = exec('abiword -t txt'+__dirname+path+'//"'+cur+'"');
+      cur = cur.substring(0, cur.length-3);
+      cur += 'txt';
+      console.log(cur);
+      //parse( __dirname + '/Packets/'+cur, 'utf8');
+    }
+  });
+}
 
-fs.readdir('Packets', function(err, files){
-  console.log(files);
-  for(file in files){
-    var cur = files[file];
-    var convert = exec('abiword -t txt Packets/"'+cur+'"');
-    cur = cur.substring(0, cur.length-3);
-    cur += 'txt';
-    console.log(cur);
-    parse( __dirname + '/Packets/'+cur, 'utf8');
-  }
-});
+parse(__dirname + '/Packets/Stanford.txt', 'utf8');

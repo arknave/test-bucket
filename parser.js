@@ -1,4 +1,5 @@
 var exec = require('child_process').exec
+var path = require('path');
 var fs = require('fs');
 
 var parse = function(filename, encoding){
@@ -29,11 +30,23 @@ var parse = function(filename, encoding){
     } 
   });
 }
-var convert = function(path) {
+
+var convertdir = function(path) {
+  var validext = ['doc, docx, rtf']
   fs.readdir(__dirname + path , function(err, files){
     console.log(files);
     for(file in files){
       var cur = files[file];
+      var valid = false;
+      for(ext in validext){
+        if(path.exitname(cur)==validext[ext]){
+          valid = true;
+          break;
+        }
+      }
+      if ( !valid ) {
+        return;
+      }
       var convert = exec('abiword -t txt'+__dirname+path+'//"'+cur+'"');
       cur = cur.substring(0, cur.length-3);
       cur += 'txt';

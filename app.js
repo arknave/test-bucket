@@ -33,7 +33,6 @@ var tossupSchema = new mongoose.Schema({
   tossupText: String,
   tossupAnswer: String
 })
-var tossup = db.model('tossup',tossupSchema);
 
 var bonusSchema = new mongoose.Schema({
   subject: String, 
@@ -54,9 +53,13 @@ var bonus = db.model('bonus',bonusSchema);
 app.get('/', function(req, res){
   res.render('index');
 });
-app.post('/', function(req,res){
-  res.redirect('/upload');
+
+app.post('/upload', function(req,res){
+  console.log(req.body);
+  console.log(req.files);
+  res.redirect('back');
 });
+
 
 app.get('/upload', function(req, res){
   res.render('upload');

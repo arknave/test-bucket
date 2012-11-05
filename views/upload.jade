@@ -4,4 +4,26 @@ html
   body
     p File Uploaded
     a(href = '/') Go Home
-    
+html(lang="en")
+  head
+    title Upload File
+  body  
+    p Some things to keep in mind when you upload:
+    ul
+      li ONLY upload zip files which contain only the following:
+        ul
+          li doc
+          li docx
+          li rtf
+          li pdf
+          li html
+          li odt
+          li txt
+      li Make sure that a title is entered for the tournament.
+      li Make sure that tournament difficulties are entered.
+
+    form(method="post", enctype = "multipart/form-data", action = "/upload")
+      label Tournament Name
+      input(type = "text", name = "tname") 
+      input(type = "file", name = "uploadfile")
+      input(type = "submit")

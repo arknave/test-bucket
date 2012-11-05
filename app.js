@@ -50,12 +50,18 @@ var bonusSchema = new mongoose.Schema({
 })
 var bonus = db.model('bonus',bonusSchema); 
 
+
 app.get('/', function(req, res){
   res.render('index');
 });
 app.post('/', function(req,res){
   res.redirect('/upload');
 });
+
+app.get('/upload', function(req, res){
+  res.render('upload');
+});
+
 app.get('/search/', function(req,res){
   res.render('search', { scripts: ['client.js']});
 });

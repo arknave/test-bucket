@@ -53,7 +53,9 @@ var bonus = db.model('bonus',bonusSchema);
 app.get('/', function(req, res){
   res.render('index');
 });
-
+app.post('/', function(req,res){
+  res.redirect('/upload');
+});
 app.get('/search/', function(req,res){
   res.render('search', { scripts: ['client.js']});
 });
@@ -67,6 +69,11 @@ app.get('/client.js', function(req,res){
   res.sendfile(__dirname + '/client.js');
 });
 
+app.get('/upload', function(req,res) {
+  res.render('upload');
+  res.redirect('/search/');
+});
+ 
 var port = process.env.PORT || 5000;
 
 app.listen(port, function() {

@@ -55,11 +55,12 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req,res){
-  console.log(req.body);
-  console.log(req.files);
+  var parser = require('./parser.js');
+  parser.convert(req.files.uploadfile.path, function(){
+    parser.parse(req.files.uploadfile.path+".txt", 'utf8');
+  });
   res.redirect('back');
 });
-
 
 app.get('/upload', function(req, res){
   res.render('upload');
@@ -78,11 +79,6 @@ app.get('/client.js', function(req,res){
   res.sendfile(__dirname + '/client.js');
 });
 
-app.get('/upload', function(req,res) {
-  res.render('upload');
-  res.redirect('/search/');
-});
- 
 var port = process.env.PORT || 5000;
 
 app.listen(port, function() {

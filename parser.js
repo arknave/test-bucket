@@ -2,8 +2,8 @@ var exec = require('child_process').exec
 var path = require('path');
 var fs = require('fs');
 
-var parse = function(filename, encoding){
-  fs.readFile(filename, encoding, function(err, data){
+exports.parse = function(filename, encoding){
+  fs.readFile(__dirname + '/' + filename, encoding, function(err, data){
     if (err) throw err;
     lines = data.split("\n");
     var bonus = false;
@@ -16,22 +16,36 @@ var parse = function(filename, encoding){
       var tossup = cur.match(/(\d{1,2})\.\s?([\s\S]+)/i);
       var answer = cur.match(/ANSWER:\s?([\s\S]+)/i);
       var bonuspart = cur.match(/\[10\]\s?([\s\S]+)/i);
-      if(tossup !=null && tossup != undefined){
-        console.log(tossup[1]+" "+tossup[2]);
-      }
-      if(answer !=null && answer != undefined){
-        console.log(answer[1]);
+      if(!bonus){
+        if(tossup !=null && tossup != undefined){
+          console.log(tossup[1]+" "+tossup[2]);
+        }
+        if(answer !=null && answer != undefined){
+          console.log(answer[1]);
+        }
       }
       if(bonus){
+        if(tossup !=null && tossup != undefined){
+          console.log(tossup[1]+" "+tossup[2]);
+        }
         if(bonuspart !=null && bonuspart != undefined){
           console.log(bonuspart[1]);
+        }
+        if(answer !=null && answer != undefined){
+          console.log(answer[1]);
         }
       } 
     } 
   });
 }
 
-var convertdir = function(path) {
+exports.convert = function(fp, callback){
+  exec('abiword -t txt '+__dirname+'/'+fp, function(){
+    callback();
+  });
+}
+
+exports.convertdir = function(path) {
   var validext = ['doc, docx, rtf']
   fs.readdir(__dirname + path , function(err, files){
     console.log(files);
@@ -55,5 +69,3 @@ var convertdir = function(path) {
     }
   });
 }
-
-parse(__dirname + '/Packets/Stanford.txt', 'utf8');

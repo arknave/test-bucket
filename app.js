@@ -79,6 +79,10 @@ app.get('/client.js', function(req,res){
   res.sendfile(__dirname + '/client.js');
 });
 
+app.get('/public/images/bj.jpg', function(req,res){
+  res.sendfile(__dirname + '/public/images/bj.jpg');
+});
+
 var port = process.env.PORT || 5000;
 
 app.listen(port, function() {

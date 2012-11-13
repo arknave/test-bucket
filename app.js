@@ -72,15 +72,14 @@ app.get('/search/', function(req,res){
 
 app.get('/search/:query?', function(req,res) {
   var query = req.params.query;
-  return db.query;
 });
 
 app.get('/client.js', function(req,res){
   res.sendfile(__dirname + '/client.js');
 });
 
-app.get('/public/images/bj.jpg', function(req,res){
-  res.sendfile(__dirname + '/public/images/bj.jpg');
+app.get('/public/images/:image', function(req,res){
+  res.sendfile(__dirname + '/public/images/'+req.params.image);
 });
 
 var port = process.env.PORT || 5000;

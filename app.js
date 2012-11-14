@@ -16,7 +16,7 @@ db.once('open', function () {
   console.log("mission accomplished");
 });
 
-var text, err;
+var text, err; 
 
 var tournamentSchema = new mongoose.Schema({
   name: String,
@@ -55,6 +55,15 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req,res){
+  var temp = new tournament({name: req.files.tname, year: req.files.tyear, difficulty: req.files.diff});
+  temp.save(function (err) {
+  if (err) return handleError(err);
+  // saved!
+    })
+  tournament.findOne({ 'name': 'ACF Fall' }, function      (err, person) {
+  if (err) return handleError(err);
+  console.log('%s is a tournament.', tournament.dname)
+    })
   console.log(req.body);
   console.log(req.files);
   res.redirect('back');

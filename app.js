@@ -21,33 +21,32 @@ var text, err;
 var tournamentSchema = new mongoose.Schema({
   name: String,
   year: Number,
-  difficulty: Number
+  difficulty: Number,
+  packet: {
+    tossup: {	
+      subject: String, 
+      idTournament: Number,
+      packetName: String, 
+      tossupNumber: Number,
+      tossupText: String,
+      tossupAnswer: String
+      },
+    bonus: {
+      subject: String, 
+      idTournament: Number,
+      packetName: String, 
+      bonusNumber: Number,
+      bonusPreamble: String,
+      bonusQuestion1: String, 
+      bonusAnswer1: String, 
+      bonusQuestion2: String, 
+      bonusAnswer2: String,
+      bonusQuestion3: String, 
+      bonusAnswer3: String
+      }
+   }
 })
 var tournament = db.model('tournament', tournamentSchema);
-
-var tossupSchema = new mongoose.Schema({
-  subject: String, 
-  idTournament: Number,
-  packetName: String, 
-  tossupNumber: Number,
-  tossupText: String,
-  tossupAnswer: String
-})
-
-var bonusSchema = new mongoose.Schema({
-  subject: String, 
-  idTournament: Number,
-  packetName: String, 
-  bonusNumber: Number,
-  bonusPreamble: String,
-  bonusQuestion1: String, 
-  bonusAnswer1: String, 
-  bonusQuestion2: String, 
-  bonusAnswer2: String,
-  bonusQuestion3: String, 
-  bonusAnswer3: String
-})
-var bonus = db.model('bonus',bonusSchema); 
 
 
 app.get('/', function(req, res){

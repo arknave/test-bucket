@@ -45,6 +45,13 @@ exports.convert = function(fp, callback){
   });
 }
 
+exports.zipconv = function(fp, callback){
+  var zip = require('adm-zip');
+  var name = path.basename(fp, path.extname(fp));
+  zip.extractAllTo(__dirname + '/'+name+'/', false);
+  convertdir(__dirname + '/' + name + '/');
+}
+
 exports.convertdir = function(path) {
   fs.readdir(__dirname + path , function(err, files){
     console.log(files);

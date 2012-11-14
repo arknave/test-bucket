@@ -47,8 +47,8 @@ var bonusSchema = new mongoose.Schema({
   bonusQuestion3: String, 
   bonusAnswer3: String
 })
-var bonus = db.model('bonus',bonusSchema); 
 
+var bonus = db.model('bonus',bonusSchema); 
 
 app.get('/', function(req, res){
   res.render('index');

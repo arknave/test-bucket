@@ -55,12 +55,11 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req,res){
-  var parser = require('./parser.js');
-  parser.convert(req.files.uploadfile.path, function(){
-    parser.parse(req.files.uploadfile.path+".txt", 'utf8');
-  });
+  console.log(req.body);
+  console.log(req.files);
   res.redirect('back');
 });
+
 
 app.get('/upload', function(req, res){
   res.render('upload');
@@ -72,16 +71,18 @@ app.get('/search/', function(req,res){
 
 app.get('/search/:query?', function(req,res) {
   var query = req.params.query;
+  return db.query;
 });
 
 app.get('/client.js', function(req,res){
   res.sendfile(__dirname + '/client.js');
 });
 
-app.get('/public/images/:image', function(req,res){
-  res.sendfile(__dirname + '/public/images/'+req.params.image);
+app.get('/upload', function(req,res) {
+  res.render('upload');
+  res.redirect('/search/');
 });
-
+ 
 var port = process.env.PORT || 5000;
 
 app.listen(port, function() {

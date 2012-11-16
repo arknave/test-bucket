@@ -55,17 +55,17 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req,res){
-  /*var temp = new tournament({name: req.files.tname, year: req.files.tyear, difficulty: req.files.diff});
+/*  var temp = new tournament({name: req.body.tname, year: req.body.tyear, difficulty: req.body.diff});
   temp.save(function (err) {
-  if (err) return handleError(err);
-  // saved!
-    })
-  tournament.findOne({ 'name': 'ACF Fall' }, function      (err, person) {
-  if (err) return handleError(err);
-  console.log('%s is a tournament.', tournament.dname)
-    })
-  */
-  parser = require(__dirname + '/parser.js');
+    if (err) return handleError(err);
+    console.log(temp);
+  });
+
+Person.findOne({ 'name' : 'ACF Fall' }, 'name', function (err, tournament) {
+    if (err) return handleError(err);
+    console.log('%s is a tournament.',tournament.name);
+    )};
+*/
   console.log(req.body);
   console.log(req.files);
   console.log(req.files.uploadfile.path);

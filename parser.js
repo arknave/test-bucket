@@ -46,21 +46,22 @@ exports.convert = function(fp, callback){
 }
 
 exports.zipconv = function(fp, callback){
-  var zip = require('adm-zip');
-  var name = path.basename(fp, path.extname(fp));
-  zip.extractAllTo(__dirname + '/'+name+'/', false);
-  convertdir(__dirname + '/' + name + '/');
+  var admzip = require('adm-zip');
+  var zip = new admzip(path.join(__dirname,fp));
+  zip.extractAllTo(path.join(__dirname,'/queue/'), false);
+  exports.convertdir('/queue/Final Packets/');
+  callback();
 }
 
-exports.convertdir = function(path) {
-  fs.readdir(__dirname + path , function(err, files){
+exports.convertdir = function(pth) {
+  fs.readdir(__dirname + pth , function(err, files){
     console.log(files);
     for(file in files){
       var cur = files[file];
-      var convert = exec('abiword -t txt'+__dirname+path+'//"'+cur+'"');
-      cur = cur.substring(0, cur.length-3);
-      cur += 'txt';
-      console.log(cur);
+      var convert = exec('abiword -t txt '+path.join(__dirname, pth, cur), function(){
+        console.log('abiword -t txt '+path.join(__dirname,pth,cur));
+      });
+      //parse(__dirname + path +'/'+ cur, 'utf8');
     }
   });
 }

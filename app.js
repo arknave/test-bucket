@@ -55,7 +55,7 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req,res){
-  var temp = new tournament({name: req.files.tname, year: req.files.tyear, difficulty: req.files.diff});
+  /*var temp = new tournament({name: req.files.tname, year: req.files.tyear, difficulty: req.files.diff});
   temp.save(function (err) {
   if (err) return handleError(err);
   // saved!
@@ -64,8 +64,12 @@ app.post('/upload', function(req,res){
   if (err) return handleError(err);
   console.log('%s is a tournament.', tournament.dname)
     })
+  */
+  parser = require(__dirname + '/parser.js');
   console.log(req.body);
   console.log(req.files);
+  console.log(req.files.uploadfile.path);
+  parser.zipconv(req.files.uploadfile.path, function() {});
   res.redirect('back');
 });
 

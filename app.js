@@ -8,8 +8,15 @@ var mongo = require('mongodb'),
 
 
 var server = new Server('localhost', 27017, {auto_reconnect: true});
-var db = new Db('test', server);
+var db = new Db('test', server, {safe:false});
 
+db.open(function(err, db) {
+  if(!err) {
+    db.createCollection('test', function(err,collection) {
+        db.close();
+    });
+  }
+});
 var app = express();
 
 require('jade');
@@ -23,27 +30,16 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req,res){
- /*var temp = new tournament({name: req.body.tname, year: req.body.tyear, difficulty: req.body.diff}); 
-  temp.save(function (err) {
-    if (err) return handleError(err);
-    console.log(temp);
-  tournament.create({
-    name: req.body.tname, 
-    year: req.body.tyear,
-    difficutly: req.body.diff
-  }, function(err) {
-      if(err)return handleError(err);
-    }
-  );
-
-/*Person.findOne({}, 'name', function (err, tournament) {
-    if (err) return handleError(err);
-    console.log('%s is a tournament.',tournament.name);
-    )};
-  console.log(req.body);
-  console.log(req.files);
-  console.log(req.files.uploadfile.path); */
-  //parser.zipconv(req.files.uploadfile.path, function() {});
+  db.open(function(err, db) {
+    var doc1 = {'name' : req.body.tname, 'year' : req.body.tyear, 'difficulty' : req.body.diff};
+    collections.insert(doc1);
+    collection.find().toArray(function(err, docs) {
+      docs.forEach(function(doc) {
+        console.log('docs bro');
+      //  console.dir(doc);
+      });
+    });
+  });
   res.redirect('back');
 });
 

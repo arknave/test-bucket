@@ -30,14 +30,21 @@ app.get('/', function(req, res){
 
 app.post('/upload', function(req,res){
   db.open(function(err, db) {
-    var doc1 = {'name' : req.body.tname, 'year' : req.body.tyear, 'difficulty' : req.body.diff};
-    collections.insert(doc1);
-    collection.find().toArray(function(err, docs) {
-      docs.forEach(function(doc) {
-        console.log('docs bro');
-      //  console.dir(doc);
+    if(!err){
+      db.collection('test', function(err, collection){
+        var doc1 = {'name' : req.body.tname, 'year' : req.body.tyear, 'difficulty' : req.body.diff};
+        collection.insert(doc1);
+        collection.find().toArray(function(err, docs) {
+          docs.forEach(function(doc) {
+            console.log('docs bro');
+          //  console.dir(doc);
+          });
+        });
       });
-    });
+    }
+    else{
+      console.log(err);
+    }
   });
   res.redirect('back');
 });

@@ -32,11 +32,11 @@ app.post('/upload', function(req,res){
   db.open(function(err, db) {
     if(!err){
       db.collection('test', function(err, collection){
-        var doc1 = {'name' : req.body.tname, 'year' : req.body.tyear, 'difficulty' : req.body.diff};
-        collection.insert(doc1);
+        var tournament = {'tournname' : req.body.tname, 'tournyear' : req.body.tyear, 'tourndifficulty' : req.body.diff};
+        collection.insert(tournament);
         collection.find().toArray(function(err, docs) {
           docs.forEach(function(doc) {
-            console.log('docs bro');
+            console.log(doc.tournname);
           //  console.dir(doc);
           });
         });

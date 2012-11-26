@@ -6,7 +6,6 @@ var mongo = require('mongodb'),
   Server = mongo.Server, 
   Db = mongo.Db;
 
-
 var server = new Server('localhost', 27017, {auto_reconnect: true});
 var db = new Db('test', server, {safe:false});
 
@@ -43,7 +42,6 @@ app.post('/upload', function(req,res){
   res.redirect('back');
 });
 
-
 app.get('/upload', function(req, res){
   res.render('upload');
 });
@@ -71,5 +69,3 @@ var port = process.env.PORT || 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
-
-

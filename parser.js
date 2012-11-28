@@ -49,7 +49,7 @@ exports.zipconv = function(fp, callback){
   var AdmZip = require('adm-zip');
   var zip = new AdmZip(fp);
   var zipEntries = zip.getEntries();
-
+  console.log("hehe butts");
   zipEntries.forEach(function(zipEntry){
     console.log(zipEntry.toString());
   });

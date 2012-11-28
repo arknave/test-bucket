@@ -47,13 +47,12 @@ exports.convert = function(fp, callback){
 
 exports.zipconv = function(fp, callback){
   var AdmZip = require('adm-zip');
-  var zip = new AdmZip(path.join(__dirname,fp));
+  var zip = new AdmZip(fp);
   var zipEntries = zip.getEntries();
 
   zipEntries.forEach(function(zipEntry){
     console.log(zipEntry.toString());
   });
-  callback();
 }
 
 exports.convertdir = function(pth) {

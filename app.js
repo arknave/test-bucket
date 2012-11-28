@@ -28,6 +28,10 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req,res){
+  parser = require('./parser.js');
+
+  parser.zipconv(req.files.path);
+
   db.open(function(err, db) {
     if(!err){
       db.collection('test', function(err, collection){

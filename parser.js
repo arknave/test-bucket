@@ -46,10 +46,13 @@ exports.convert = function(fp, callback){
 }
 
 exports.zipconv = function(fp, callback){
-  var admzip = require('adm-zip');
-  var zip = new admzip(path.join(__dirname,fp));
-  zip.extractAllTo(path.join(__dirname,'/queue/'), false);
-  exports.convertdir('/queue/Final Packets/');
+  var AdmZip = require('adm-zip');
+  var zip = new AdmZip(path.join(__dirname,fp));
+  var zipEntries = zip.getEntries();
+
+  zipEntries.forEach(function(zipEntry){
+    console.log(zipEntry.toString());
+  });
   callback();
 }
 

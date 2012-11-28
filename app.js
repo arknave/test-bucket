@@ -1,7 +1,6 @@
 var express = require('express');
 var http = require('http');
 var stylus = require('stylus');
-
 var mongo = require('mongodb'),
   Server = mongo.Server, 
   Db = mongo.Db;
@@ -37,7 +36,7 @@ app.post('/upload', function(req,res){
         collection.find().toArray(function(err, docs) {
           docs.forEach(function(doc) {
             console.log(doc.tournname);
-          //  console.dir(doc);
+            console.dir(doc);
           });
         });
       });

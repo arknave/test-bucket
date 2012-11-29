@@ -49,10 +49,9 @@ exports.zipconv = function(fp, callback){
   var AdmZip = require('adm-zip');
   var zip = new AdmZip(fp);
   var zipEntries = zip.getEntries();
-  console.log(fp);
-  console.log(zipEntries);
   zipEntries.forEach(function(zipEntry){
     console.log(zipEntry.toString());
+    exports.parse("uploads/"+zipEntry.entryName, "utf8");
   });
 }
 

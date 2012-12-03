@@ -50,10 +50,12 @@ exports.zipconv = function(fp, callback){
   var zip = new AdmZip(fp);
   var zipEntries = zip.getEntries();
   zipEntries.forEach(function(zipEntry){
-    console.log(zipEntry.toString());   
+   // console.log(zipEntry.toString());   
     zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
-    exports.convert(zipEntry.entryName);
-    exports.parse("queue/"+zipEntry.entryName, "utf8");
+    console.log('abiword -t txt ' + 'queue/"' + zipEntry.entryName+'"');
+    exec('abiword -t txt ' + 'queue/"' + zipEntry.entryName+'"');
+   // exports.convert("/queue/" + zipEntry.entryName);
+   // exports.parse("queue/"+zipEntry.entryName, "utf8");
   });
 }
 

@@ -39,7 +39,7 @@ exports.parse = function(filename, encoding){
   });
 }
 
-exports.convert = function(fp){
+exports.convert = function(fp, callback){
   exec('abiword -t txt '+__dirname+'/'+fp, function(){
     
   });

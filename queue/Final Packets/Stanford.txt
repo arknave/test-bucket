@@ -1,0 +1,236 @@
+ACF Fall 2011
+Packet by Stanford (Sandy Huang and Brian Fei)
+Edited by Sarah Angelo, Bryan Berend, Matt Bollinger, Matt Hart, Gaurav Kandlikar, and Matt Menard
+
+1.Measurements of heat capacity where this quantity is constant produce larger values than those at constant volume. This quantity can be defined as temperature times the partial of entropy with respect to volume. Intensity over the speed of light gives one version of this quantity when light is absorbed, and when the light is reflected the radiation type of this quantity is doubled. This quantity is constant in isobaric processes and inversely proportional to volume in Boyle’s Law. For 10 points, name this scalar quantity with units of Pascals that is defined as force per unit area. 
+ANSWER: pressure
+
+2.This philosopher attacked boarding schools for their overemphasis on corporal punishment and argued for private tutoring in Some Thoughts Concerning Education. He introduced the concept of an association of ideas in one work. In another work, he argued that Robert Filmer defied common sense by defending the divine rights of kings in addition to justifying William III and Mary II’s role in the Glorious Revolution. For 10 points, name this English philosopher who wrote An Essay Concerning Human Understanding and the more conservative Two Tracts on Government before moving to a more liberal position in his Two Treatises on Government.
+ANSWER: John Locke
+
+3.The premiere of this man’s sculpture of Domingo Sarmiento caused riots. Among his early works are St. John the Baptist Preaching and The Man with the Broken Nose, the latter of which was rejected by the Salon. Nooses hang around the necks of the barefooted figures of one work, and another work was accused of being cast from molds made by a live model. In addition to The Burghers of Calais and The Age of Bronze, this artist also created the massive Gates of Hell, which contains the model for his later sculpture of an embracing Paolo and Francesca called The Kiss. For 10 points, name this French sculptor who originally intended to depict a seated Dante in The Thinker.
+ANSWER: François Auguste René Rodin
+
+4.This fundamental equation does not include a term that accounts for the ohmic loss caused by current flow, and that term appears in the Butler-Volmer equation. One equation often used in conjunction with this statement accounts for the flux of ions moving across a membrane. That modification calculates membrane potentials of living cells and is named for Goldman. This equation states that the product of RT over NF and the natural log of a reaction quotient yields the change in a cell’s electric potential. For 10 points, name this equation that can be used to calculate equilibrium reduction potential of electrochemical half cells.
+ANSWER: Nernst Equation
+
+5.As a favor to one of her priestesses, this figure struck that priestess' two sons, Cleobis and Biton, dead after they pulled a cart. In the Tonaia festival, the cult image of this figure was bound with branches from the lygos tree. After losing a bet concerning whether men or women enjoyed sex more, this figure blinded a Theban seer. In another story, this goddess had a servant guard a white heifer she received as a present from her husband. One of her sons fell for nine days after being cast out of Olympus either by this cow-eyed goddess or for helping her. Her children included Eileithyia, Ares, and Hephaestus. For 10 points, name this queen of Olympus and jealous wife of Zeus.
+ANSWER: Hera
+
+6.A girl partially dressed in blue points at a naked group of boys in one painting by this artist. Another work of his depicts Ernest May, a Jewish banker, talking with others at the titular location. In addition to Young Spartans Exercising and At the Stock Exchange, this artist also depicted his brother Rene reading a newspaper while the titular commodity is spread across a table in his The New Orleans Cotton Exchange. More characteristic works by this artist include a depiction of a woman with a drink in front of her, L'Absinthe, and paintings such as Stage Rehearsal and The Dance Class. For 10 points, name this French painter known for his depictions of ballerinas.
+ANSWER: Edgar Degas (de-GAH)
+
+7.This leader proposed a fourth branch of government called a “moral power” to indoctrinate and police young citizens during their early education. He was taught the ideas of rationalist philosophers by his childhood tutor, Simon Rodriguez. This leader convinced another general to retire to France in the Guayaquil Conference. After winning such battles as Boyaca and Carabobo, this man became the first president of Gran Colombia. Along with Jose de San Martin, he ousted the Spanish viceroys from Latin America. For 10 points, name this Liberator of South America.
+ANSWER: Simon Bolivar
+
+8.Tankyrase proteins modify proteins that in turn regulate these structures. Sheltrin complexes obscure these structures so that they are not affected by a cell’s repair pathways. Dyskeratosis congenita is caused by a body’s inability to regulate these structures. These structures determine a cell’s Hayflick limit. The active site of an enzyme named after these structures is called its “palm,” and that enzyme functions as a reverse transcriptase to lengthen these structures. In humans, these structures are composed of a series of GGGTTA repeats, and they solve the end replication problem. For 10 points, name these segments of DNA found at the tips of chromosomes
+ANSWER: telomeres
+
+9.This figure built the nehushtan to heal some companions from snakebites and disappeared after climbing Mount Pisgah. According to the sura Al-Qasas, after breaking up a second fight involving the same quarrelsome man, this figure fled to Midian. This figure was hidden for three months before being set afloat on a reed basket by Amram and Jochebed, who three years earlier had given birth to Aaron, who constructed the Golden Calf in this man's absence. Getting help from a strong east wind that separated the Sea of Reeds, this figure delivered the Hebrews from Egyptian slavery. For 10 points, name this prophet who received the Ten Commandments on Mount Sinai.
+ANSWER: Moses [or Moshe]
+
+10.One ruler of this name expelled the Jesuits from the Spanish Empire and supported the United States in the American Revolution. Another ruler of this name claimed the throne against his niece, Isabella II, sparking a series of namesake wars. The most famous ruler of this name was the father of Philip II and dispatched Hernan Cortez to the Americas. For 10 points, give the common name of these Spanish monarchs, one of whom was also the Holy Roman Emperor who presided over the Council of Trent.
+ANSWER: Carlos [or Charles; or Charles III; or Charles V; or Charles I]
+
+11.In one work by this author, the academics Hannah and Bernard become obsessed with the past of the estate at which they are guests in scenes that alternate with the centuries-earlier time of the brilliant Thomasina and her tutor Septimus Hodge. This author of Arcadia also wrote a play in which a title character accuses a troupe of players of not understanding death. This author follows two title characters from their bet that results in over seventy coins landing heads until Horatio reflects on their demise after they are attacked by pirates on a ship in which they are escorting Hamlet. For 10 points, name this author of Rosencrantz and Guildenstern are Dead.
+ANSWER: Tom Stoppard [or Tomas Straussler]
+
+12.These minerals have two perpendicular planes of cleavage and thus tend to form irregular rectangular blocks, and one of the two major classes of these minerals display striations along cleavage planes. Examples of these minerals include labradorite and microcline, and the evolution of these minerals is described by the continuous branch of Bowen’s Reaction Series. These minerals are grouped as being alkalai or plagioclase, and the orthoclase type of these aluminosilicate minerals defines a Mohs hardness value of six. Granite is primarily composed of quartz and these minerals. For 10 points, name this most abundant type of mineral on Earth.
+ANSWER: feldspars [accept alkali feldspars or K-feldspars or potassium feldspars before “labradorite”]
+
+13.Lord Byron composed a “song for” this movement after making his first speech in the House of Lords defending it. This group was responsible for the murder of William Horsfall seven days after they attacked Rawfords Mill under the leadership of George Mellors. In response to their actions, Parliament passed the Frame Breaking Act. Most of these people were skilled workers whose livelihoods were threatened by new mechanized looms. For 10 points, name this group of early nineteenth century British dissenters, whose name now denotes those who avoid using technology.
+ANSWER: Luddites
+
+14.One character in this work makes up for fainting by insisting that a dentist remove a perfectly good tooth. Another character in this work wears his girlfriend’s pantyhose around his neck for luck. The religious Kiowa attempts to stop the narrator of this collection from obsessing over the possible love of mathematics of a boy a butterfly lands on in “The Man I Killed.” In this collection’s title story, Jimmy Cross blames himself for the death of a man who was shot while Cross, the commanding officer, could think only of his unrequited love. For 10 points, name this Tim O’Brien short story collection set during the Vietnam War whose title objects include morphine, M&Ms, and fear.
+ANSWER: The Things They Carried
+
+15.This composer included “The Chapel of William Tell” and “The Fountains of the Villa d’Este” in a work inspired by three years of travel. The first part of another of his works is subtitled “The Dance in the Village Inn.” In addition to Years of Pilgrimage, he also abstained from using a “Paradiso” movement in his setting of the Divine Comedy, his Dante Symphony. This composer portrayed the devil in both his Faust Symphony and the four whirling Mephisto Waltzes. This composer of the Transcendental Etudes also used the gypsy melodies of his native country for a set of 19 piano pieces. For 10 points, name this composer who wrote the Hungarian Rhapsodies.
+ANSWER: Franz Liszt [or Ferenc Liszt]
+
+16.This country’s southwestern region contains a large peneplain located at the Hardanger Plateau. In the Jotunheim Mountains lies this country’s highest point, Galdho Peak. At the southern end of the Gudbrands Valley lies this country’s largest lake, Mjosa. Hydroelectric power is provided by this country’s longest river, the Glomma. The Royal Society of Sciences is located in this country’s port of Trondheim and the historic wooden structures of Bryggen are located in Bergen. It is largely bordered to the east by Sweden and separated by the North Sea from Denmark.  For 10 points, name this country in which the Nobel Prizes are presented in its capital city, Oslo.
+ANSWER: Kingdom of Norway [or Kongeriket Norge]
+
+17.This thinker argued that too much of human propensity was wasted on inefficient institutions in The Instinct of Workmanship and the State of the Industrial Arts. This thinker expanded on the incompatibility of the modern industrial process and the irrational means of finance in The Theory of Business Enterprise. In one work, he wrote that, “With the exception of the instinct of self-preservation, the propensity for emulation is probably the strongest and most alert and persistent of the economic motives proper.” For 10 points, name this American economist who coined the phrases pecuniary emulation and conspicuous consumption in The Theory of the Leisure Class.
+ANSWER: Thorstein Bunde Veblen
+
+18.This President’s reforms include establishing the Children’s Bureau to examine problems affecting young children. This President controversially declared that “the best bill that the party has ever passed” was the highly protectionist Payne-Aldrich Tariff. This man came under fire from conservationists for replacing his chief forester in the Ballinger-Pinchot affair. In foreign policy, this man advocated the ineffective policy of “dollar diplomacy.” For 10 points, name this early twentieth century President derided both for his incompetence and for his large girth.
+ANSWER: William Howard Taft
+
+19.The chorus of this play laments the danger of marrying above one’s station and also remembers the title character’s marriage to their sister while keeping him company even during the terrible storm that closes this play. In this play, the protagonist refuses the aid of the father of the chorus, Oceanus, and Kratus argues with Hephaestus when the latter laments his duty. The title character of this play tells the story of the Danaids while revealing Io’s destiny and refuses to tell Hermes which future child could be able to overthrow Zeus. For 10 points, name this Aeschylus play whose title character has been chained to a rock for giving fire to humans.
+ANSWER: Prometheus Bound
+
+20.In one novel by this author, Valentine is among several people poisoned by her stepmother Madame Villefort, though she is saved because of the love of the shipping master’s son. In that novel by this author, Albert abandons a duel over the ruin of his father thanks to the intervention of his mother Mercedes. The protagonist of another novel by this author protects the queen’s seamstress Constance from the schemes of the villainous Lady de Winter. For 10 points, name this author who described the revenge of Edmond Dantes in The Count of Monte-Cristo and the adventures of Athos, Porthos, Aramis, and D’Artagnan in The Three Musketeers.
+ANSWER: Alexandre Dumas, pere
+
+21.This team's Hall of Fame features players such as Herman Long and Dale Murphy. This team won their division for an MLB record fourteenth consecutive time in 2005. That span that saw the pitching dominance of Tom Glavine, Greg Maddux, and John Smoltz, and continued that year with then-rookies Jeff Francouer and Brian McCann, all under the eye of manager Bobby Cox. Hank Aaron was a member of this team when he hit his record-breaking 715th home run. For 10 points, name this NL East team that plays its home games at Turner Field, and features recently acquired second baseman Dan Uggla as well as veteran third baseman Chipper Jones.
+ANSWER: Atlanta Braves [or Atlanta Braves]
+
+Bonuses:
+
+1.In 1967, this leader began work as an electrician in Gdansk. For 10 points each:
+[10] Name this labor activist who led millions of Polish workers before winning the 1983 Nobel Peace Prize.
+ANSWER: Lech Walesa
+[10] Lech Walesa led this Polish trade union and political party. At one point, eighty percent of Poland’s workers were members.
+ANSWER: Independent Self-Governing Trade Union “Solidarity” [or Niezalezny Samorzad Zwiazkow Zawodowych “Solidarnosc”]
+[10] After independence, Solidarity won almost every seat this body, the Polish parliament.
+ANSWER: Sejm
+
+2.Tibetans call this mountain Chomolungma. For 10 points each:
+[10] Name this highest mountain in the world located in the Himalayas.
+ANSWER: Mount Everest [or Sagarmatha; or Zhumulangma Feng; or Chu-mu-lang-ma Feng; or Qomolangma Feng]
+[10] In 1954, Ardito Desio successfully led an expedition to climb this second highest mountain in the world.
+ANSWER: K2 [or Mount Godwin Austen; or Qogir Feng; or Dapsang; or Chogori]
+[10] Pierre Beghin made the first solo ascent of this third highest mountain in the world.
+ANSWER: Kanchenjunga [or Kumbhkaran Lungur]
+
+3.The “plagal” type of these entities is sometimes called the “Amen” type because it is often used in church hymns. For 10 points each:
+[10] Name these melodic constructs which end a phrase or a section of music. Including “authentic” and “deceptive” types, these entities can be thought of as punctuation marks in music.
+ANSWER: cadence
+[10] Cadences themselves are composed of two or three of these units of music, which consist of two or more notes played simultaneously. One consisting of a root, a third, and a fifth is called a triad.
+ANSWER: chords
+[10] This type of cadence ends with a dominant chord, usually the V (“five”) chord, and is preceded by any other chord. Since it does not sound complete, this cadence is often used in the middle of phrases rather than the end.
+ANSWER: half cadence [or imperfect cadence; or open cadence]
+
+4.Forces led by this leader killed Albert Sidney Johnston during the Battle of Shiloh. For 10 points each:
+[10] Name this general who gained one nickname when he was only willing to allow men in Fort Donelson under Simon Buckner to unconditionally surrender.
+ANSWER: Ulysses S. Grant [or Hiram Ulysses Grant]
+[10] Ulysses S. Grant’s capture of this city after a month and a half long siege effectively divided the Confederate States of America.
+ANSWER: Siege of Vicksburg
+[10] This Confederate general surrendered Vicksburg to Ulysses S. Grant.
+ANSWER: John Clifford Pemberton
+
+5.In this novel, Arthur Jarvis is murdered. For 10 points each:
+[10] Name this novel in which the Zulu preacher Stephen Kumalo travels to Johannesburg and searches for his son Absalom, only to find him in jail for murder.
+ANSWER: Cry, the Beloved Country
+[10] Cry, the Beloved Country is a novel by this South African author.
+ANSWER: Alan Paton
+[10] Kumalo initially comes to Johannesburg when he receives a letter saying this sister of his is sick. When he arrives, he learns that this woman has become a prostitute and liquor dealer.
+ANSWER: Gertrude Kumalo [prompt on Kumalo]
+
+6.The ‘constititutional’ form of this relationship exists between two molecules with the same chemical formula but different bonding patterns. For 10 points each:
+[10] Name this general relationship whose ‘stereo’ form includes diastereomers (dia-stereo-mers”).
+ANSWER: stereoisomerism [accept word forms like isomers or isomeric; or constitutional isomerism; or structural isomerism]
+[10] This type of stereoisomerism exists between molecules that are mirror images of each other. This relationship exists between L and D types of chiral molecules.
+ANSWER: enantiomers [accept word forms like enantiomeric]
+[10] This type of isomerism occurs when two forms of a molecule can readily interconvert with each other. Ketones and enols exhibit a form of this property when they undergo a proton transfer reaction.
+ANSWER: tautomers [accept word forms like tautomerism; or keto-enol tautomerism]
+
+7.Sections of this work include “Of a Christian Commonwealth” and “Of the Kingdom of Darkness,” and it describes life as “solitary, poor, nasty, brutish, and short.” For 10 points each:
+[10] Name this 1651 work that explores the proper and improper roles of a church within a state.
+ANSWER: Leviathan
+[10] Leviathan was written by this English philosopher who advocated absolutism in order to prevent a war of all against all. 
+ANSWER: Thomas Hobbes
+[10] Hobbes and mathematician John Wallis feuded over the supposed proof of squaring the circle in this Hobbes work, which concerned logic and geometry and accompanied De Cive and De Homine.
+ANSWER: De Corpore
+
+8.The protagonist of this novel is eager to join Napoleon. For 10 points each:
+[10] Name this 1839 French novel in which Fabrizio del Dongo has a series of adventures with the assistance of his wealthy and aristocratic aunt Gina and finally retires to a monastery.
+ANSWER: The Charterhouse of Parma [or La Chartreuse de Parme]
+[10] The Charterhouse of Parma was written by this French author.
+ANSWER: Stendhal [or Marie-Henri Beyle]
+[10] In this Stendhal novel, an ambitious young man named Julien Sorel seduces Mathilde and Madame de Renal.
+ANSWER: The Red and the Black [or Le Rouge et le noir]
+
+9.These functions are formed from variables and constants by performing a finite number of additions, subtractions, and multiplications. For 10 points each:
+[10] Descartes rule of signs can be used to compute the number of real roots of these functions, an example of which is the expression “x squared plus x plus five.”
+ANSWER: polynomials
+[10] The set of all polynomials with real coefficients over the variable x form one of these algebraic structures. Unlike groups, they possess two operations, and, unlike fields, they do not possess inverses for multiplication.
+ANSWER: rings
+[10] One formulation of this man's Nullstellensatz relates algebraic sets and ideals of polynomial rings. He names a paradox about a hotel with infinitely many rooms and he created a list of 23 proposed problems.
+ANSWER: David Hilbert
+
+10.Closely associated with the idea of Ziran, this doctrine conveys the idea of acting effortlessly and in harmony with the universe. For 10 points each:
+[10] Name this spiritual concept that literally means “without action.”
+ANSWER: wu wei
+[10] Wu wei is a central principle of this Chinese religious and philosophical tradition whose name literally means “the way.”
+ANSWER: Taoism [or Daoism]
+[10] The Tao Te Ching, the central text of Daoism, is attributed to this “Old Master,” who may have been a court scholar during the Zhou dynasty.
+ANSWER: Laozi [or Lao Dun; or Tai Shang Lao Jun; or Li Er; or Tai Shang Xuanyuan Huangdi]
+
+11.Two sailboats can be seen on the lake in the background of this painting, which also shows a woman playing with a small dog in its bottom left corner. For 10 points each:
+[10] Name this painting that shows people relaxing and enjoying a meal underneath a striped awning. It was completed in 1881 by Pierre-Auguste Renoir.
+ANSWER: The Luncheon of the Boating Party
+[10] Renoir was part of this art movement prominent in nineteenth century France. Including such members as Camille Pissaro and Mary Cassatt, it was named after a Claude Monet painting of a sunrise.
+ANSWER: Impressionism [or Impression, Sunrise; or Impression, Soleil Levant]
+[10] Another Impressionist painter was this Englishman who is known for such landscapes as Early Snow at Louveciennes and Flood at Port-Marly.
+ANSWER: Alfred Sisley
+
+12.Species in this genus include one which is notoriously resistant to many antibiotics and causes diarrhea, and another species in this genus produces an important neurotoxin. For 10 points each:
+[10] Name this genus of gram positive bacteria whose species include dificile and botulinum, the latter of which causes botulism.
+ANSWER: clostridium [prompt on C.]
+[10] All members of the clostridium genus are obligate anaerobes, which means they cannot survive in the presence of this element. Human cells produce lactic acid when there are insufficient quantities of this element around.
+ANSWER: oxygen
+[10] Diarrhea can also be caused by this disease, which is characterized by inflammation of the small intestine. This eponymous disease, for which no cure is currently known, features skip lesions of the intestine.
+ANSWER: Crohn’s disease
+
+13.In this novel, Robert Lebrun attempts to avoid an affair by leaving Grand Isle. For 10 points each:
+[10] Name this novel in which Robert does eventually have an affair with Edna Pontelier, who drowns herself when he leaves her.
+ANSWER: The Awakening
+[10] This American author wrote The Awakening.
+ANSWER: Kate Chopin [or Katherine O’Flaherty]
+[10] In this Chopin short story, the slave-owner Armand learns only after sending his wife and child away that the child is black because of his hidden heritage and not hers.
+ANSWER: “Desiree’s Baby”
+
+14.In this opera, Nedda drives away Tonio’s advances with a whip before meeting her lover Silvio. For 10 points each:
+[10] Name this 1893 opera that ends with Canio stabbing his wife Nedda and Silvio. It was composed by Ruggero Leoncavallo and it is often performed on a double bill with Mascagni’s Cavalleria Rusticana.
+ANSWER: I Pagliacci [or The Clowns]
+[10] Leoncavallo also composed an opera with this name. A better known opera with this name was composed by Giacomo Puccini and focuses on the characters Mimi, Marcello, and his Parisian group of friends.
+ANSWER: La Bohème
+[10] Act one of Pagliacci ends with Canio singing this dramatic aria as he dons his clown outfit. It translates to “Put on the costume.”
+ANSWER: “Vesti la giubba”
+
+15.Her offspring include the Scorpion-man, the Fish-man, the Bull-man, and her later consort Kingu. For 10 points each:
+[10] Name this monster of primeval chaos whose original husband was Apsu.
+ANSWER: Tiamat
+[10] In the Enuma Elish, both Tiamat and Kingu were slain by this figure, who was hailed with 50 names after acquiring the Tablets of Destiny.
+ANSWER: Marduk
+[10] Marduk was the patron deity of this Mesopotamian city, whose historical kings included Hammurabi.
+ANSWER: Babylon
+
+16.In this poem, the poet urges the reader to “glut thy sorrow on a morning rose.” For 10 points each:
+[10] Name this poem in which the title personified emotion has a shrine “in the very temple of Delight” and lives among the more transitory Beauty, Joy, and Pleasure.
+ANSWER: “Ode on Melancholy”
+[10] This British poet of “Ode on Melancholy” also wrote “Ode to a Nightingale.”
+ANSWER: John Keats
+[10] The speaker of this Keats poem considers the lesson learned from the title object to be “Beauty is truth, truth beauty, --that is all ye know on earth, and all ye need to know.”
+ANSWER: “Ode on a Grecian Urn”
+
+17.This effect arises from the alignment of magnetic domains and persists after the removal of an external magnetic field. For 10 points each:
+[10] Name this type of magnetism named for the substance in which it is most often observed.
+ANSWER: ferromagnetism
+[10] This temperature is analogous to the Neel temperature in antiferromagnetic materials. When a ferromagnetic material is heated to this temperature, it loses its magnetism.
+ANSWER: Curie point [or Curie temperature]
+[10] This effect, which was observed when an amplifier and a ferromagnet created a crackling sound, provided evidence that ferromagnetic materials are magnetized in small discrete domains rather than continuously.
+ANSWER: Barkhausen Effect
+
+18.When it came time to attend college, Columbia was ultimately chosen over Berkeley by Meadow in this TV show. For 10 points each:
+[10] Name this TV show created by David Chase that explores the complicated, violent world of the Mafia.
+ANSWER: The Sopranos
+[10] The Sopranos is set in this U.S. state, also home to Snooki, Pauly D, and Mike “The Situation.”
+ANSWER: New Jersey
+[10] In an effort to control his panic attacks, Tony Soprano sees this psychiatrist throughout all six seasons.
+ANSWER: Jennifer Melfi [or Jennifer Melfi]
+
+19.This man divorced his wife, Marcia, to give her as a gift to the elderly Hortensius, then remarried her after that man’s death. For 10 points each:
+[10] Name this model of Stoic virtue who opposed Catiline’s conspiracy and committed suicide at Utica after the Battle of Thapsus.
+ANSWER: Cato the Younger [or Marcus Porcius Cato Uticensis; or Cato of Utica; prompt on Marcus Porcius Cato; do not accept “Cato the Elder”; do not accept “Cato the Censor”]
+[10] Cato the Younger committed suicide rather than submit to this man, who defeated his rival, Pompey, at the Battle of Pharsalus.
+ANSWER: Gaius Julius Caesar [prompt on Caesar]
+[10] Cato’s opposition to Caesar’s policies was a driving force in the formation of the First Triumvirate between Pompey, Caesar, and this wealthy patrician who was killed by the Parthians.
+ANSWER: Marcus Licinius Crassus
+
+20.This leader’s forces crushed American forces at the Bay of Pigs. For 10 points each:
+[10] Name this leader who in 1959 turned Cuba into the first communist state in the Western Hemisphere.
+ANSWER: Fidel Castro Ruz
+[10] Fidel Castro took control of Cuba by overthrowing this dictator.
+ANSWER: Fulgencio Batista y Zaldivar
+[10] The revolutionary movement that overthrew Fulgencio Batista takes its name from this date, on which rebels attacked the Moncada Barracks.
+ANSWER: 26th of July Movement [or Movimiento 26 de Julio; or July 26th, 1953]
+
+21.This drama was based on an actual case detailed in “Closed Doors, or The Great Drumsheugh Case.” For 10 points each:
+[10] Name this play in which Mary Tilford accuses the owners of her boarding school of having a lesbian affair so that she will not have to return.
+ANSWER: The Children’s Hour
+[10] This playwright of The Children’s Hour also wrote about Regina, who lets her husband die of a heart attack so she can inherit his wealth, in The Little Foxes.
+ANSWER: Lillian Hellman
+[10] This man was Lillian Hellman’s lover for thirty years. This author of detective fiction created Nick and Nora Charles in The Thin Man and Sam Spade in The Maltese Falcon.
+ANSWER: Samuel Dashiell Hammett

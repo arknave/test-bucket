@@ -39,12 +39,6 @@ exports.parse = function(filename, encoding){
   });
 }
 
-exports.convert = function(fp){
-  exec('abiword -t txt '+__dirname+'/'+fp, function(){
-    
-  });
-}
-
 exports.zipconv = function(fp, callback){
   var AdmZip = require('adm-zip');
   var zip = new AdmZip(fp);
@@ -53,9 +47,8 @@ exports.zipconv = function(fp, callback){
    // console.log(zipEntry.toString());   
     zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
     console.log('abiword -t txt ' + 'queue/"' + zipEntry.entryName+'"');
-    exec('abiword -t txt ' + 'queue/"' + zipEntry.entryName'"');
-   // exports.convert("/queue/" + zipEntry.entryName);
-   // exports.parse("queue/"+zipEntry.entryName, "utf8");
+    exec('abiword -t txt ' + 'queue/"' + zipEntry.entryName+'"');
+    exports.parse("queue/"+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8");
   });
 }
 

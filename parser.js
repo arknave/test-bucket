@@ -2,7 +2,7 @@ var exec = require('child_process').exec
 var path = require('path');
 var fs = require('fs');
 
-exports.parse = function(filename, encoding){
+exports.parse = function(filename, encoding, collection){
   fs.readFile(__dirname + '/' + filename, encoding, function(err, data){
     if (err) throw err;
     lines = data.split("\n");
@@ -16,30 +16,47 @@ exports.parse = function(filename, encoding){
       var tossup = cur.match(/(\d{1,2})\.?\s?([\s\S]+)/i);
       var answer = cur.match(/ANSWER:\s?([\s\S]+)/i);
       var bonuspart = cur.match(/\[10\]\s?([\s\S]+)/i);
+      var tup = {};
+      var bns = {};
+      var partcntr = 1;
       if(!bonus){
         if(tossup !=null && tossup != undefined){
-          console.log(tossup[1]+" "+tossup[2]);
+          tup['tunum'] = tossup[1];
+          tup['tutxt'] = tossup[2];
         }
         if(answer !=null && answer != undefined){
-          console.log(answer[1]);
+          tup['tuans'] = answer[1];
+          //add mongodb
+          console.log(tup);
+          collection.insert(tup);
+          tup = {};
         }
       }
       if(bonus){
-        if(tossup !=null && tossup != undefined){
-          console.log(tossup[1]+" "+tossup[2]);
+        if(tossup != null && tossup != undefined){
+          bns['bnum'] = tossup[1];
+          bns['btxt'] = tossup[2];
         }
-        if(bonuspart !=null && bonuspart != undefined){
-          console.log(bonuspart[1]);
+        if(bonuspart != null && bonuspart != undefined){
+          bns['bpart'+partcntr] = bonuspart[1];
         }
-        if(answer !=null && answer != undefined){
-          console.log(answer[1]);
+        if(answer != null && answer != undefined){
+          bns['bans'+partcntr] = answer[1];
+	  //add mongodb
+          console.log(bns);
+          collection.insert(bns);
+          partcntr++;
+          if(partcntr = 4){
+            bns = {};
+            partcntr = 1;
+          }
         }
       } 
     } 
   });
 }
 
-exports.zipconv = function(fp, callback){
+exports.zipconv = function(fp, collection){
   var AdmZip = require('adm-zip');
   var zip = new AdmZip(fp);
   var zipEntries = zip.getEntries();
@@ -48,10 +65,9 @@ exports.zipconv = function(fp, callback){
     zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
  //   console.log('abiword -t txt ' + 'queue/"' + zipEntry.entryName+'"');
     exec('abiword -t txt ' + 'queue/"' + zipEntry.entryName+'"');
-//    exports.parse("queue/"+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8");
+    exports.parse('queue/"'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt"', "utf8", collection);
   });
 }
-
 
 exports.convertdir = function(pth) {
   fs.readdir(__dirname + pth , function(err, files){

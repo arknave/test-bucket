@@ -29,12 +29,11 @@ app.get('/', function(req, res){
 
 app.post('/upload', function(req,res){
   parser = require('./parser.js');
-  console.log(req.files);
-  parser.zipconv(req.files.uploadfile.path);
 
   db.open(function(err, db) {
     if(!err){
       db.collection('test', function(err, collection){
+        parser.zipconv(req.files.uploadfile.path.replace(" ", "// "), collection);
         var tournament = {'tournname' : req.body.tname, 'tournyear' : req.body.tyear, 'tourndifficulty' : req.body.diff};
         collection.insert(tournament);
         collection.find().toArray(function(err, docs) {

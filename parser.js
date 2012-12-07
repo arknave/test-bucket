@@ -9,6 +9,7 @@ exports.parse = function(filename, encoding, collection){
     var bonus = false;
     var tup = {};
     var bns = {};
+    var partcntr = 1;
     for(line in lines){
       var cur = lines[line];
       var isBonus = cur.match(/bonuse?s?/gi);
@@ -18,7 +19,7 @@ exports.parse = function(filename, encoding, collection){
       var tossup = cur.match(/^(\d{1,2})\.?\s?([\s\S]+)$/i);
       var answer = cur.match(/^ANSWER:\s?([\s\S]+)$/i);
       var bonuspart = cur.match(/^\[10\]\s+?([\s\S]+)$/i);
-      var partcntr = 1;
+   
       if(!bonus){
         if(tossup !=null && tossup != undefined){
           tup['tunum'] = tossup[1];
@@ -45,7 +46,7 @@ exports.parse = function(filename, encoding, collection){
 	  //add mongodb
           //collection.insert(bns);
           partcntr++;
-          if(partcntr = 4){
+          if(partcntr === 4){
             console.log(bns);
             bns = {};
             partcntr = 1;

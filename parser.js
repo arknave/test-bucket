@@ -7,17 +7,17 @@ exports.parse = function(filename, encoding, collection){
     if (err) throw err;
     lines = data.split("\n");
     var bonus = false;
+    var tup = {};
+    var bns = {};
     for(line in lines){
       var cur = lines[line];
       var isBonus = cur.match(/bonuse?s?/gi);
       if(isBonus!=null && isBonus!= undefined){
         bonus = true;
       }
-      var tossup = cur.match(/(\d{1,2})\.?\s?([\s\S]+)/i);
-      var answer = cur.match(/ANSWER:\s?([\s\S]+)/i);
-      var bonuspart = cur.match(/\[10\]\s?([\s\S]+)/i);
-      var tup = {};
-      var bns = {};
+      var tossup = cur.match(/^(\d{1,2})\.?\s?([\s\S]+)$/i);
+      var answer = cur.match(/^ANSWER:\s?([\s\S]+)$/i);
+      var bonuspart = cur.match(/^\[10\]\s+?([\s\S]+)$/i);
       var partcntr = 1;
       if(!bonus){
         if(tossup !=null && tossup != undefined){
@@ -43,10 +43,10 @@ exports.parse = function(filename, encoding, collection){
         if(answer != null && answer != undefined){
           bns['bans'+partcntr] = answer[1];
 	  //add mongodb
-          console.log(bns);
           //collection.insert(bns);
           partcntr++;
           if(partcntr = 4){
+            console.log(bns);
             bns = {};
             partcntr = 1;
           }
@@ -63,9 +63,9 @@ exports.zipconv = function(fp, collection){
   zipEntries.forEach(function(zipEntry){
     //console.log(zipEntry.toString());   
     zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
-    //console.log('abiword -t txt ' + 'queue/"' + zipEntry.entryName+'"');
-    exec('abiword -t txt ' + 'queue/"' + zipEntry.entryName+'"', function(){
-      return exports.parse('queue/"'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt"', "utf8", collection);
+    console.log('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"');
+    exec('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"', function(){
+      return exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", collection);
     });
   });
 }

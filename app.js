@@ -33,9 +33,9 @@ app.post('/upload', function(req,res){
   db.open(function(err, db) {
     if(!err){
       db.collection('test', function(err, collection){
-        parser.zipconv(req.files.uploadfile.path.replace(" ", "// "), collection);
+        parser.zipconv(req.files.uploadfile.path, collection);
         var tournament = {'tournname' : req.body.tname, 'tournyear' : req.body.tyear, 'tourndifficulty' : req.body.diff};
-        collection.insert(tournament);
+        //collection.insert(tournament);
         collection.find().toArray(function(err, docs) {
           docs.forEach(function(doc) {
             console.log(doc.tournname);

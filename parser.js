@@ -44,8 +44,7 @@ exports.parse = function(filename, encoding, collection){
           bns['bans'+partcntr] = answer[1];
 	  //add mongodb
           //collection.insert(bns);
-          console.log(partcntr);
-          partcntr = partcntr+1;
+          partcntr++;
           if(partcntr === 4){
             console.log(bns);
             bns = {};

@@ -21,25 +21,12 @@ app.get('/', function(req, res){
 });
 
 app.post('/upload', function(req,res){
-  parser = require('./parser.js');
-
-  db.open(function(err, db) {
-    if(!err){
-/*      db.collection('test', function(err, collection){
-        parser.zipconv(req.files.uploadfile.path, collection);
-        var tournament = {'tournname' : req.body.tname, 'tournyear' : req.body.tyear, 'tourndifficulty' : req.body.diff};
-        //collection.insert(tournament);
-        collection.find().toArray(function(err, docs) {
-          docs.forEach(function(doc) {
-            console.log(doc.tournname);
-            console.dir(doc);
-          });
-        });
-      });*/
-    }
-    else{
-      console.log(err);
-    }
+  //parser = require('./parser.js');
+  //parser.zipconv(req.files.uploadfile.path, collection);
+  var tournament = {'tournname' : req.body.tname, 'tournyear' : req.body.tyear, 'tourndifficulty' : req.body.diff};
+  db.tournament.insert(tournament);
+  db.tournament.findAll({}, function(err, it){
+    console.log('It: ', + err||it, '\n');
   });
   res.redirect('back');
 });

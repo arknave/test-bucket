@@ -1,20 +1,13 @@
 var express = require('express');
 var http = require('http');
 var stylus = require('stylus');
-var mongo = require('mongodb'),
-  Server = mongo.Server, 
-  Db = mongo.Db;
 
-var server = new Server('localhost', 27017, {auto_reconnect: true});
-var db = new Db('test', server, {safe:false});
-
-db.open(function(err, db) {
-  if(!err) {
-    db.createCollection('test', function(err,collection) {
-        db.close();
-    });
-  }
+var db = require('mongo-lazy').open({
+    db: 'test',
+    host: 'localhost',
+    port: 27017,
 });
+
 var app = express();
 
 require('jade');
@@ -32,7 +25,7 @@ app.post('/upload', function(req,res){
 
   db.open(function(err, db) {
     if(!err){
-      db.collection('test', function(err, collection){
+/*      db.collection('test', function(err, collection){
         parser.zipconv(req.files.uploadfile.path, collection);
         var tournament = {'tournname' : req.body.tname, 'tournyear' : req.body.tyear, 'tourndifficulty' : req.body.diff};
         //collection.insert(tournament);
@@ -42,7 +35,7 @@ app.post('/upload', function(req,res){
             console.dir(doc);
           });
         });
-      });
+      });*/
     }
     else{
       console.log(err);

@@ -2,7 +2,7 @@ var exec = require('child_process').exec
 var path = require('path');
 var fs = require('fs');
 
-exports.parse = function(filename, encoding, collection){
+exports.parse = function(filename, encoding, db){
   fs.readFile(__dirname + '/' + filename, encoding, function(err, data){
     if (err) throw err;
     lines = data.split("\n");
@@ -28,7 +28,7 @@ exports.parse = function(filename, encoding, collection){
           tup['tuans'] = answer[1];
           //add mongodb
           console.log(tup);
-          //collection.insert(tup);
+          db.tossup.insert(tup);
           tup = {};
         }
       }
@@ -43,7 +43,7 @@ exports.parse = function(filename, encoding, collection){
         if(answer != null && answer != undefined){
           bns['bans'+partcntr] = answer[1];
 	  //add mongodb
-          //collection.insert(bns);
+          db.bonus.insert(bns);
           partcntr++;
           if(partcntr === 4){
             console.log(bns);
@@ -56,7 +56,7 @@ exports.parse = function(filename, encoding, collection){
   });
 }
 
-exports.zipconv = function(fp, collection){
+exports.zipconv = function(fp, db){
   var AdmZip = require('adm-zip');
   var zip = new AdmZip(fp);
   var zipEntries = zip.getEntries();
@@ -65,7 +65,7 @@ exports.zipconv = function(fp, collection){
     zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
     console.log('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"');
     exec('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"', function(){
-      return exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", collection);
+      return exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", db);
     });
   });
 }

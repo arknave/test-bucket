@@ -21,11 +21,11 @@ exports.parse = function(filename, encoding, db){
       var bonuspart = cur.match(/^\[10\]\s+?([\s\S]+)$/i);
       if(!bonus){
         if(tossup !=null && tossup != undefined){
-          tup['tunum'] = tossup[1];
-          tup['tutxt'] = tossup[2];
+          tup['num'] = parseInt(tossup[1]);
+          tup['txt'] = tossup[2];
         }
         if(answer !=null && answer != undefined){
-          tup['tuans'] = answer[1];
+          tup['ans'] = answer[1];
           //add mongodb
           console.log(tup);
           db.tossup.insert(tup);
@@ -34,19 +34,19 @@ exports.parse = function(filename, encoding, db){
       }
       if(bonus){
         if(tossup != null && tossup != undefined){
-          bns['bnum'] = tossup[1];
-          bns['btxt'] = tossup[2];
+          bns['num'] = parseInt(tossup[1]);
+          bns['txt'] = tossup[2];
         }
         if(bonuspart != null && bonuspart != undefined){
-          bns['bpart'+partcntr] = bonuspart[1];
+          bns['part'+partcntr] = bonuspart[1];
         }
         if(answer != null && answer != undefined){
-          bns['bans'+partcntr] = answer[1];
+          bns['ans'+partcntr] = answer[1];
 	  //add mongodb
-          db.bonus.insert(bns);
           partcntr++;
           if(partcntr === 4){
             console.log(bns);
+            db.bonus.insert(bns);
             bns = {};
             partcntr = 1;
           }

@@ -25,7 +25,7 @@ exports.parse = function(filename, encoding, db){
         number = pname.indexOf('.txt');
         pname = pname.substring(0,number);
 	bns['packet'] = pname;
-       // console.log(pname);
+        console.log(pname);
         if(tossup !=null && tossup != undefined){
           tup['num'] = parseInt(tossup[1]);
           tup['txt'] = tossup[2];
@@ -33,7 +33,7 @@ exports.parse = function(filename, encoding, db){
         if(answer !=null && answer != undefined){
           tup['ans'] = answer[1];
           //add mongodb
-          console.log(tup);
+          //console.log(tup);
           db.tossup.insert(tup);
           tup = {};
         }
@@ -56,7 +56,7 @@ exports.parse = function(filename, encoding, db){
 	  //add mongodb
           partcntr++;
           if(partcntr === 4){
-            console.log(bns);
+            //console.log(bns);
             db.bonus.insert(bns);
             bns = {};
             partcntr = 1;

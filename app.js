@@ -23,7 +23,7 @@ app.get('/', function(req, res){
 app.post('/upload', function(req,res){
   parser = require('./parser.js');
   parser.zipconv(req.files.uploadfile.path, db);
-  var tournament = {'tournname' : req.body.tname, 'tournyear' : req.body.tyear, 'tourndifficulty' : req.body.diff};
+  var tournament = {'name' : req.body.tname, 'year' : req.body.tyear, 'diff' : req.body.diff};
   db.tournament.insert(tournament);
   db.tournament.findAll({}, function(err, it){
     console.log('It: ', + err||it, '\n');
@@ -41,7 +41,6 @@ app.get('/search/', function(req,res){
 
 app.get('/search/:query?', function(req,res) {
   var query = req.params.query;
-  return db.query;
 });
 
 app.get('/client.js', function(req,res){

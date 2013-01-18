@@ -16,9 +16,9 @@ exports.parse = function(filename, encoding, pname, db){
       if(isBonus!=null && isBonus!= undefined){
         bonus = true;
       }
-      var tossup = cur.match(/^(\d{1,2})\.?\s?([\s\S]+)$/i);
-      var answer = cur.match(/^ANSWER:\s?([\s\S]+)$/i);
-      var bonuspart = cur.match(/^\[10\]\s+?([\s\S]+)$/i);
+      var tossup = cur.match(/^(\d{1,2})\.?\s?([^\r\n]+)/i);
+      var answer = cur.match(/ANSWER:\s?([^\r\n]+)/i);
+      var bonuspart = cur.match(/\[10\]\s+?([^\r\n]+)/i);
       if(!bonus){
         if(tossup !== null && tossup !== undefined){
           tup['num'] = parseInt(tossup[1]);

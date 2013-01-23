@@ -59,8 +59,11 @@ exports.zipconv = function(fp, db){
   var AdmZip = require('adm-zip');
   var zip = new AdmZip(fp);
   var zipEntries = zip.getEntries();
+  var path = require('path');
   zipEntries.forEach(function(zipEntry){
-    //console.log(zipEntry.toString());   
+    if(path.extname(zipEntry) !== '.doc'){
+      continue;
+    }   
     zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
     console.log(zipEntry.name);
     exec('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"', function(){

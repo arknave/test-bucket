@@ -17,7 +17,7 @@ exports.parse = function(filename, encoding, pname, db){
         bonus = true;
       }
       var tossup = cur.match(/^(\d{1,2})\.?\s?([^\r\n]+)/i);
-      var answer = cur.match(/\w*ANSWER\w*:\s?([^\r\n]+)/i);
+      var answer = cur.match(/\w*ANSWER\w*:?\s?([^\r\n]+)/i);
       var bonuspart = cur.match(/\[10\]\s+?([^\r\n]+)/i);
       if(!bonus){
         if(tossup !== null && tossup !== undefined){

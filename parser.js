@@ -61,14 +61,13 @@ exports.zipconv = function(fp, db){
   var zipEntries = zip.getEntries();
   var path = require('path');
   zipEntries.forEach(function(zipEntry){
-    if(path.extname(zipEntry) !== '.doc'){
-      continue;
-    }   
-    zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
-    console.log(zipEntry.name);
-    exec('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"', function(){
-      return exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", zipEntry.name, db);
-    });
+    if(path.extname(zipEntry.entryName) === '.doc'){
+      zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
+      console.log(zipEntry.name);
+      exec('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"', function(){
+        return exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", zipEntry.name, db);
+      });
+    }
   });
 }
 

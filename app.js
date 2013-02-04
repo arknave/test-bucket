@@ -22,8 +22,9 @@ app.get('/', function(req, res){
 
 app.post('/upload', function(req,res){
   parser = require('./parser.js');
-  parser.zipconv(req.files.uploadfile.path, db);
-  var tournament = {'name' : req.body.tname, 'year' : req.body.tyear, 'diff' : req.body.diff};
+  var tournament = {'name' : req.body.tname, 'year' : req.body.tyear,   'diff' : req.body.diff};
+  parser.zipconv([req.files.uploadfile.path, tournament], db);
+  
   db.tournament.insert(tournament);
   db.tournament.findAll({}, function(err, it){
     console.log('It: ', + err||it, '\n');

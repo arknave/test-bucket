@@ -1,6 +1,7 @@
 var express = require('express');
 var http = require('http');
 var stylus = require('stylus');
+var path = require('path');
 
 var db = require('mongo-lazy').open({
     db: 'test',
@@ -13,9 +14,11 @@ var app = express();
 require('jade');
 app.set('view engine', 'jade');
 app.set('view options', {layout: false});
-app.use(express.logger());
-app.use(express.bodyParser({uploadDir:'./uploads'}));
-
+app.configure(function(){
+  app.use(express.logger());
+  app.use(express.bodyParser({uploadDir:'./uploads'}));
+  app.use(express.static(path.join(__dirname, 'public')));
+});
 app.get('/', function(req, res){
   res.render('index');
 });
@@ -40,10 +43,6 @@ app.get('/search/', function(req,res){
 
 app.get('/search/:query?', function(req,res) {
   var query = req.params.query;
-});
-
-app.get('/client.js', function(req,res){
-  res.sendfile(__dirname + '/client.js');
 });
 
 var port = process.env.PORT || 8080;

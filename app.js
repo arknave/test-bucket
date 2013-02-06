@@ -24,7 +24,6 @@ app.post('/upload', function(req,res){
   parser = require('./parser.js');
   var tournament = {'name' : req.body.tname, 'year' : req.body.tyear,   'diff' : req.body.diff};
   parser.zipconv([req.files.uploadfile.path, tournament], db, function(p){
-    console.log(p);
     res.render('upload', {tup: JSON.stringify(p[0], null, '\t'), 
                           bns: JSON.stringify(p[1], null, '\t')
                          });

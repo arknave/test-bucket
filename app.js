@@ -23,17 +23,16 @@ app.get('/', function(req, res){
 app.post('/upload', function(req,res){
   parser = require('./parser.js');
   var tournament = {'name' : req.body.tname, 'year' : req.body.tyear,   'diff' : req.body.diff};
-  parser.zipconv([req.files.uploadfile.path, tournament], db);
-  
-  db.tournament.insert(tournament);
-  db.tournament.findAll({}, function(err, it){
-    console.log('It: ', + err||it, '\n');
+  parser.zipconv([req.files.uploadfile.path, tournament], db, function(p){
+    console.log(p);
+    res.render('upload', {tup: JSON.stringify(p[0], null, '\t'), 
+                          bns: JSON.stringify(p[1], null, '\t')
+                         });
   });
-  res.redirect('back');
 });
 
 app.get('/upload', function(req, res){
-  res.render('upload');
+  res.render('upload', {tup: 'tossups goes here', bns: 'bonus goes here'});
 });
 
 app.get('/search/', function(req,res){
@@ -48,11 +47,6 @@ app.get('/client.js', function(req,res){
   res.sendfile(__dirname + '/client.js');
 });
 
-app.get('/upload', function(req,res) {
-  res.render('upload');
-  res.redirect('/search/');
-});
- 
 var port = process.env.PORT || 8080;
 
 app.listen(port, function() {

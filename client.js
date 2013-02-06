@@ -1,9 +1,14 @@
-var search = $("#searchbar");
-var code = $("#output");
+var search = document.getElementById('searchbar');
+var code = document.getElementById('output');
 
-var db = {'ying': 'liu', 'arnav': 'sastry', 'freed': 'alex', 'greg': 'the lyon is more threatening than the cougar', 'alex':'"#SWAG #YOLO" denko', 'mikey':'zhou', 'stephen':'ngo','brian':'cui','trey':'gonsulin','evan':'tey','elliot':'gordon','jorge':'martinez','jesse':'patterson','mr':'stephens','imran':'kahloro', 'benjamin':'pfeiffer', 'zoli': 'windows4lyfe kahan'};
-search.keyup(function() {
-  if(db[search.val()]!==undefined){
-    code.text(search.val()+" "+db[search.val()]);
-  }
-});
+search.addEventListener('keyup', function(){
+  var xhr = new XMLHttpRequest;
+  xhr.open('GET', 'http://173.172.90.120:9200/questions/_search?q=' + search.value, true);
+  xhr.onreadystatechange = function(){
+    if (4 == xhr.readyState) {
+      var tup = JSON.parse(xhr.responseText).hits.hits[0]._source;
+      code.textContent = tup.txt+'ANSWER: '+tup.ans
+    }
+  };
+  xhr.send();
+}, false);

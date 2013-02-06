@@ -3,13 +3,15 @@ var path = require('path');
 var fs = require('fs');
 var http = require('http');
 
-exports.parse = function(filename, encoding, pname, db){
+exports.parse = function(filename, encoding, pname, db, callback){
+  var tupray = [];
+  var bnsray = [];
   fs.readFile(__dirname + '/' + filename, encoding, function(err, data){
     if (err) throw err;
     lines = data.split("\n");
     var bonus = false;
-    var tup = {'pack': pname[0], 'tmt' : pname[1]};
-    var bns = {'pack': pname[0], 'tmt' : pname[1]};
+    var tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
+    var bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
     var partcntr = 1;
     for(line in lines){
       var cur = lines[line];
@@ -25,29 +27,31 @@ exports.parse = function(filename, encoding, pname, db){
           tup['num'] = parseInt(tossup[1]);
           tup['txt'] = tossup[2];
         }
-        if(answer !== null && answer !== undefined){ tup['ans'] = answer[1]; //add mongodb
-          console.log(tup);
-          //db.tossup.insert(tup);
-	var options = {
-	  host: 'localhost',
-	  port: 9200,
-	  path: '/questions/tossup',
-	  method: 'POST'
-	};
+        if(answer !== null && answer !== undefined){ 
+          tup['ans'] = answer[1]; //add mongodb
+          tupray.push(tup);
+          //console.log(tup);
+          /*db.tossup.insert(tup);
+          var options = {
+            host: 'localhost',
+            port: 9200,
+            path: '/questions/tossup',
+            method: 'POST'
+	  };
 
-	var req = http.request(options, function(res) {
-	  console.log('STATUS: ' + res.statusCode);
-	  console.log('HEADERS: ' + JSON.stringify(res.headers));
-	  res.setEncoding('utf8');
-	  res.on('data', function (chunk) {
-	    console.log('BODY: ' + chunk);
+	  var req = http.request(options, function(res) {
+	    console.log('STATUS: ' + res.statusCode);
+	    console.log('HEADERS: ' + JSON.stringify(res.headers));
+	    res.setEncoding('utf8');
+	    res.on('data', function (chunk) {
+	      console.log('BODY: ' + chunk);
+	    });
 	  });
-	});
 
-	// write data to request body
-	req.write(JSON.stringify(tup));
-        req.end();
-          tup = {'pack': pname[0], 'tmt' : pname[1]};
+	  // write data to request body
+	  req.write(JSON.stringify(tup));
+          req.end();*/
+          tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
         }
       }
       if(bonus){
@@ -63,62 +67,68 @@ exports.parse = function(filename, encoding, pname, db){
 	  //add mongodb
           partcntr++;
           if(partcntr === 4){
-            console.log(bns);
-            //db.bonus.insert(bns);
-          var options = {
-	  host: 'localhost',
-	  port: 9200,
-	  path: '/questions/bonus',
-	  method: 'POST'
-	};
+            bnsray.push(bns);
+            //console.log(bns);
+            
+            /*db.bonus.insert(bns);
+            var options = {
+	      host: 'localhost',
+	      port: 9200,
+	      path: '/questions/bonus',
+	      method: 'POST'
+	    };
 
-	var req = http.request(options, function(res) {
-	  console.log('STATUS: ' + res.statusCode);
-	  console.log('HEADERS: ' + JSON.stringify(res.headers));
-	  res.setEncoding('utf8');
-	  res.on('data', function (chunk) {
-	    console.log('BODY: ' + chunk);
-	  });
-	});
+	    var req = http.request(options, function(res) {
+	      console.log('STATUS: ' + res.statusCode);
+	      console.log('HEADERS: ' + JSON.stringify(res.headers));
+	      res.setEncoding('utf8');
+	      res.on('data', function (chunk) {
+	      	console.log('BODY: ' + chunk);
+	      });
+	    });
 
-	// write data to request body
-	req.write(JSON.stringify(bns));
-        req.end();
-            bns = {'pack': pname[0], 'tmt' : pname[1]};
+	    // write data to request body
+	    req.write(JSON.stringify(bns));
+            req.end();*/
+            bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
             partcntr = 1;
           }
         }
       }
-
-    } 
+    }
+    if(callback && typeof(callback) === 'function'){
+        callback([tupray, bnsray]);
+      }
   });
 }
 
-exports.zipconv = function(fp, db){
-  var AdmZip = require('adm-zip');
-  var zip = new AdmZip(fp[0]);
-  var zipEntries = zip.getEntries();
-  var path = require('path');
+exports.zipconv = function(fp, db, callback){
+  var AdmZip = require('adm-zip'),
+    zip = new AdmZip(fp[0]),
+    zipEntries = zip.getEntries(),
+    path = require('path'),
+    num = zipEntries.length,
+    ret = [[],[]];
+
   zipEntries.forEach(function(zipEntry){
     if(path.extname(zipEntry.entryName) === '.doc'){
       zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
-      console.log(zipEntry.name);
       exec('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"', function(){
-        return exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", [zipEntry.name, fp[1]], db);
+        exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", [zipEntry.name, fp[1]], db, function(ray){
+          num--;
+          ray[0].forEach(function(t){
+            ret[0].push(t);
+          });
+          ray[1].forEach(function(t){
+            ret[1].push(t);
+          });
+          if(num === 0) {
+            if(callback && typeof(callback) === 'function'){
+              callback(ret);
+            }
+          }
+        });
       });
-    }
-  });
-}
-
-exports.convertdir = function(pth) {
-  fs.readdir(__dirname + pth , function(err, files){
-    console.log(files);
-    for(file in files){
-      var cur = files[file];
-      var convert = exec('abiword -t txt '+path.join(__dirname, pth, cur), function(){
-        console.log('abiword -t txt '+path.join(__dirname,pth,cur));
-      });
-      //parse(__dirname + path +'/'+ cur, 'utf8');
     }
   });
 }

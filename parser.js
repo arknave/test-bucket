@@ -130,5 +130,8 @@ exports.zipconv = function(fp, db, callback){
         });
       });
     }
+    else {
+      n--;
+    }
   });
 }

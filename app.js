@@ -17,8 +17,22 @@ app.set('view options', {layout: false});
 app.configure(function(){
   app.use(express.logger());
   app.use(express.bodyParser({uploadDir:'./uploads'}));
+  app.use(stylus.middleware({
+    src: __dirname + '/views',
+    dest: __dirname + '/public/css',
+     compile: function (str, path, fn) { // optional, but recommended
+       stylus(str)
+       .set('filename', path)
+       .set('compress', true)
+       .render(fn);
+     }
+  }));
   app.use(express.static(path.join(__dirname, 'public')));
 });
+
+
+
+
 app.get('/', function(req, res){
   res.render('index');
 });

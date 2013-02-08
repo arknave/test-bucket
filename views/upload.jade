@@ -1,31 +1,43 @@
 !!! 5
 html(lang="en")
   head
+    include head
+    link(media="screen", rel="stylesheet", href="/css/bootstrap-fileupload.min.css")
+    link(rel="stylesheet", href="/css/upload.css")
     title Upload File
   body  
+    include navbar
     p Some things to keep in mind when you upload:
     ul
       li ONLY upload zip files which contain only the following:
         ul
           li doc
-          li docx
-          li rtf
-          li pdf
-          li html
-          li odt
-          li txt
       li Make sure that a title is entered for the tournament.
       li Make sure that tournament difficulties are entered.
 
-    form(method="post", enctype = "multipart/form-data", action = "/upload")
-      label Tournament Name
-      input(type = "text", name = "tname") 
-      label Tournament Year (Number from 1995 to 2015)
-      input(type = "text", name = "tyear")
-      label Tournament Difficulty (Number from 1 to 9)
-      input(type = "text", name = "diff")
-      input(type = "file", name = "uploadfile")
-      input(type = "submit")
+    form#upzip
+      fieldset
+        label Tournament Name
+        input(type = "text", name = "tname") 
+        label Tournament Year (Number from 1995 to 2015)
+        input(type = "text", name = "tyear")
+        label Tournament Difficulty (Number from 1 to 9)
+        input(type = "text", name = "diff")
+        div.fileupload.fileupload-new(data-provides="fileupload")
+          div.input-append
+            div.uneditable-input.span3
+              i.icon-file.fileupload-exists
+              span.fileupload-preview
+            span.btn.btn-file
+              span.fileupload-new Select file
+              span.fileupload-exists Change
+              input(type="file")
+            a.btn.fileupload-exists(href="#", data-dismiss="fileupload") Remove
+        
+        input.btn.btn-primary(type="submit") Submit Tournament
 
-    textarea #{tup}
-    textarea #{bns}
+    form#review
+
+    include scripts
+    script(src="/js/bootstrap-fileupload.min.js")
+    script(src="/js/upload.js")

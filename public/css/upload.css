@@ -1,0 +1,9 @@
+#upzip {
+  float: left;
+}
+
+textarea {
+  float: right;
+  width: 600px;
+  height: 200px;
+}

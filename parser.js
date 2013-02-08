@@ -6,6 +6,7 @@ var http = require('http');
 exports.parse = function(filename, encoding, pname, db, callback){
   var tupray = [];
   var bnsray = [];
+  var num = 1;
   fs.readFile(__dirname + '/' + filename, encoding, function(err, data){
     if (err) throw err;
     lines = data.split("\n");
@@ -13,22 +14,30 @@ exports.parse = function(filename, encoding, pname, db, callback){
     var tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
     var bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
     var partcntr = 1;
+    
     for(line in lines){
       var cur = lines[line];
       var isBonus = cur.match(/bonuse?s?/gi);
       if(isBonus!=null && isBonus!= undefined){
         bonus = true;
+        num = 1;
       }
       var tossup = cur.match(/^(\d{1,2})\.?\s?([^\r\n]+)/i);
-      var answer = cur.match(/^[\s\w]*ANSWER[\s\w]*:?\s?([^\r\n]+)$/i);
-      var bonuspart = cur.match(/\[10\]\s+?([^\r\n]+)/i);
+      var answer = cur.match(/^[\s\w]*ANS?WE[RY][\s\w]*:?\s?([^\r\n]+)$/i);
+      var bonuspart = cur.match(/\[10\]?\s+?([^\r\n]+)/i);
       if(!bonus){
         if(tossup !== null && tossup !== undefined){
           tup['num'] = parseInt(tossup[1]);
           tup['txt'] = tossup[2];
         }
         if(answer !== null && answer !== undefined){ 
-          tup['ans'] = answer[1]; //add mongodb
+          if(!tup['txt']) { continue; }
+          tup['ans'] = answer[1]; 
+          if(tup['num'] !== num) { 
+            console.log(tup);
+            throw 'Skipped question '+num+' somewhere in '+ pname[0];
+          }
+          num++;
           tupray.push(tup);
           //console.log(tup);
           /*db.tossup.insert(tup);
@@ -37,19 +46,17 @@ exports.parse = function(filename, encoding, pname, db, callback){
             port: 9200,
             path: '/questions/tossup',
             method: 'POST'
-	  };
-
-	  var req = http.request(options, function(res) {
-	    console.log('STATUS: ' + res.statusCode);
-	    console.log('HEADERS: ' + JSON.stringify(res.headers));
-	    res.setEncoding('utf8');
-	    res.on('data', function (chunk) {
-	      console.log('BODY: ' + chunk);
-	    });
-	  });
-
-	  // write data to request body
-	  req.write(JSON.stringify(tup));
+	      };
+	      var req = http.request(options, function(res) {
+	        console.log('STATUS: ' + res.statusCode);
+	        console.log('HEADERS: ' + JSON.stringify(res.headers));
+	        res.setEncoding('utf8');
+	        res.on('data', function (chunk) {
+	          console.log('BODY: ' + chunk);
+	        });
+	      });
+	      // write data to request body
+	      req.write(JSON.stringify(tup));
           req.end();*/
           tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
         }
@@ -64,31 +71,34 @@ exports.parse = function(filename, encoding, pname, db, callback){
         }
         if(answer !== null && answer !== undefined){
           bns['ans'+partcntr] = answer[1];
-	  //add mongodb
           partcntr++;
           if(partcntr === 4){
+            if(bns['num'] !== num) { 
+              console.log(bns);
+              throw 'Skipped question '+num+' somewhere in '+ pname[0];
+            }
+            num++;
             bnsray.push(bns);
             //console.log(bns);
             
             /*db.bonus.insert(bns);
             var options = {
-	      host: 'localhost',
-	      port: 9200,
-	      path: '/questions/bonus',
-	      method: 'POST'
-	    };
+	          host: 'localhost',
+	          port: 9200,
+	          path: '/questions/bonus',
+	          method: 'POST'
+	        };
 
-	    var req = http.request(options, function(res) {
-	      console.log('STATUS: ' + res.statusCode);
-	      console.log('HEADERS: ' + JSON.stringify(res.headers));
-	      res.setEncoding('utf8');
-	      res.on('data', function (chunk) {
-	      	console.log('BODY: ' + chunk);
-	      });
-	    });
+	        var req = http.request(options, function(res) {
+	          console.log('STATUS: ' + res.statusCode);
+	          console.log('HEADERS: ' + JSON.stringify(res.headers));
+	          res.setEncoding('utf8');
+	          res.on('data', function (chunk) {
+	      	    console.log('BODY: ' + chunk);
+	          });
+	        });
 
-	    // write data to request body
-	    req.write(JSON.stringify(bns));
+	        req.write(JSON.stringify(bns));
             req.end();*/
             bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
             partcntr = 1;
@@ -131,7 +141,7 @@ exports.zipconv = function(fp, db, callback){
       });
     }
     else {
-      n--;
+      num--;
     }
   });
 }

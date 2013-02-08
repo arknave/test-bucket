@@ -20,9 +20,6 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-
-
-
 app.get('/', function(req, res){
   res.render('index');
 });
@@ -30,23 +27,20 @@ app.get('/', function(req, res){
 app.post('/upload', function(req,res){
   parser = require('./parser.js');
   var tournament = {'name' : req.body.tname, 'year' : req.body.tyear,   'diff' : req.body.diff};
-  parser.zipconv([req.files.uploadfile.path, tournament], db, function(p){
-    res.render('upload', {tup: JSON.stringify(p[0], null, '\t'), 
+  parser.zipconv([req.files.zip.path, tournament], db, function(p){
+    /*res.render('upload', {tup: JSON.stringify(p[0], null, '\t'), 
                           bns: JSON.stringify(p[1], null, '\t')
-                         });
+                         });*/
+    res.send(p);
   });
 });
 
 app.get('/upload', function(req, res){
-  res.render('upload', {tup: 'tossups goes here', bns: 'bonus goes here'});
+  res.render('upload'); 
 });
 
-app.get('/search/', function(req,res){
-  res.render('search', { scripts: ['client.js']});
-});
-
-app.get('/search/:query?', function(req,res) {
-  var query = req.params.query;
+app.get('/search', function(req,res){
+  res.render('search');
 });
 
 var port = process.env.PORT || 8080;

@@ -6,6 +6,6 @@
     "node": "*",
     "npm": "*",
     "jade": "*",
-    "stylus": "*"
+    "adm-zip": "*",
   }
 }

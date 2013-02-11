@@ -1,9 +1,19 @@
+.alert {
+  display: none;
+}
+
 #upzip {
   float: left;
 }
 
-textarea {
+#review { 
   float: right;
-  width: 600px;
+}
+
+#review textarea {
   height: 200px;
+}
+
+#review button {
+  margin-top: 20px;
 }

@@ -2,13 +2,13 @@ var express = require('express');
 var http = require('http');
 var stylus = require('stylus');
 var path = require('path');
-
-var db = require('mongo-lazy').open({
+var dbroute = require('./routes/database');
+/*var db = require('mongo-lazy').open({
     db: 'test',
     host: 'localhost',
     port: 27017,
 });
-
+*/
 var app = express();
 
 require('jade');
@@ -27,10 +27,8 @@ app.get('/', function(req, res){
 app.post('/upload', function(req,res){
   parser = require('./parser.js');
   var tournament = {'name' : req.body.tname, 'year' : req.body.tyear,   'diff' : req.body.diff};
-  parser.zipconv([req.files.zip.path, tournament], db, function(p){
-    /*res.render('upload', {tup: JSON.stringify(p[0], null, '\t'), 
-                          bns: JSON.stringify(p[1], null, '\t')
-                         });*/
+  parser.zipconv([req.files.zip.path, tournament], function(err, p){
+    if(err){ console.log(err); res.send(500, err); }
     res.send(p);
   });
 });
@@ -42,6 +40,9 @@ app.get('/upload', function(req, res){
 app.get('/search', function(req,res){
   res.render('search');
 });
+
+app.post('/database/:type/index', dbroute.index);
+app.get('/database/search', dbroute.search);
 
 var port = process.env.PORT || 8080;
 

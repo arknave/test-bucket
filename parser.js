@@ -3,7 +3,7 @@ var path = require('path');
 var fs = require('fs');
 var http = require('http');
 
-exports.parse = function(filename, encoding, pname, db, callback){
+exports.parse = function(filename, encoding, pname, callback){
   var tupray = [];
   var bnsray = [];
   var num = 1;
@@ -11,8 +11,8 @@ exports.parse = function(filename, encoding, pname, db, callback){
     if (err) throw err;
     lines = data.split("\n");
     var bonus = false;
-    var tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
-    var bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
+    var tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': [0]};
+    var bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': [0]};
     var partcntr = 1;
     
     for(line in lines){
@@ -23,7 +23,7 @@ exports.parse = function(filename, encoding, pname, db, callback){
         num = 1;
       }
       var tossup = cur.match(/^(\d{1,2})\.?\s?([^\r\n]+)/i);
-      var answer = cur.match(/^[\s\w]*ANS?WE[RY][\s\w]*:?\s?([^\r\n]+)$/i);
+      var answer = cur.match(/^[\s\w]*ANS?WE?[RY][\s\w]*:?\s?([^\r\n]+)$/i);
       var bonuspart = cur.match(/\[10\]?\s+?([^\r\n]+)/i);
       if(!bonus){
         if(tossup !== null && tossup !== undefined){
@@ -35,30 +35,13 @@ exports.parse = function(filename, encoding, pname, db, callback){
           tup['ans'] = answer[1]; 
           if(tup['num'] !== num) { 
             console.log(tup);
-            throw 'Skipped question '+num+' somewhere in '+ pname[0];
+            return callback('Skipped tossup '+num+' somewhere in '+ pname[0]);
           }
           num++;
           tupray.push(tup);
           //console.log(tup);
-          /*db.tossup.insert(tup);
-          var options = {
-            host: 'localhost',
-            port: 9200,
-            path: '/questions/tossup',
-            method: 'POST'
-	      };
-	      var req = http.request(options, function(res) {
-	        console.log('STATUS: ' + res.statusCode);
-	        console.log('HEADERS: ' + JSON.stringify(res.headers));
-	        res.setEncoding('utf8');
-	        res.on('data', function (chunk) {
-	          console.log('BODY: ' + chunk);
-	        });
-	      });
 	      // write data to request body
-	      req.write(JSON.stringify(tup));
-          req.end();*/
-          tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
+          tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': [0]};
         }
       }
       if(bonus){
@@ -75,44 +58,24 @@ exports.parse = function(filename, encoding, pname, db, callback){
           if(partcntr === 4){
             if(bns['num'] !== num) { 
               console.log(bns);
-              throw 'Skipped question '+num+' somewhere in '+ pname[0];
+              return callback('Skipped bonus '+num+' somewhere in '+ pname[0]);
             }
             num++;
             bnsray.push(bns);
             //console.log(bns);
-            
-            /*db.bonus.insert(bns);
-            var options = {
-	          host: 'localhost',
-	          port: 9200,
-	          path: '/questions/bonus',
-	          method: 'POST'
-	        };
-
-	        var req = http.request(options, function(res) {
-	          console.log('STATUS: ' + res.statusCode);
-	          console.log('HEADERS: ' + JSON.stringify(res.headers));
-	          res.setEncoding('utf8');
-	          res.on('data', function (chunk) {
-	      	    console.log('BODY: ' + chunk);
-	          });
-	        });
-
-	        req.write(JSON.stringify(bns));
-            req.end();*/
-            bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
+            bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': [0]};
             partcntr = 1;
           }
         }
       }
     }
     if(callback && typeof(callback) === 'function'){
-        callback([tupray, bnsray]);
+        callback(null, [tupray, bnsray]);
       }
   });
 }
 
-exports.zipconv = function(fp, db, callback){
+exports.zipconv = function(fp, callback){
   var AdmZip = require('adm-zip'),
     zip = new AdmZip(fp[0]),
     zipEntries = zip.getEntries(),
@@ -124,17 +87,18 @@ exports.zipconv = function(fp, db, callback){
     if(path.extname(zipEntry.entryName) === '.doc'){
       zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
       exec('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"', function(){
-        exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", [zipEntry.name, fp[1]], db, function(ray){
+        exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", [zipEntry.name, fp[1]], function(err, ray){
           num--;
-          ray[0].forEach(function(t){
-            ret[0].push(t);
-          });
-          ray[1].forEach(function(t){
-            ret[1].push(t);
-          });
+          ret[0].push(typeof(ray)==='undefined' ? 'error' : ray[0]);
+          ret[1].push(typeof(ray)==='undefined' ? 'error' : ray[1]);
           if(num === 0) {
+            if(err) {
+              if(callback && typeof(callback) === 'function'){
+                return callback(err);
+              }
+            }
             if(callback && typeof(callback) === 'function'){
-              callback(ret);
+              callback(null, ret);
             }
           }
         });

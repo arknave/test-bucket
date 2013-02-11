@@ -1,0 +1,16 @@
+#searchbar {
+  margin: 0px 5px;
+}
+
+.dropdown-menu {
+  padding-top: 5px;
+}
+
+.dropdown-menu label {
+  padding 0 10px;
+}
+
+.dropdown-menu input {
+  margin: 5px;
+  float: left;
+}

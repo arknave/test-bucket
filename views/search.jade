@@ -3,10 +3,34 @@ html
   head
     title Search for your Dreams
     include head
+    link(rel="stylesheet", href="/css/search.css");
   body
     include navbar
-    input#searchbar (type = 'search')
-    p#load This is a status thing
-    #output the text goes here
+    .container
+      h2 Search for your dreams
+      form.form-search
+        input#searchbar.search-query(type='text', placeholder="Enter search terms here", data-provide="typeahead", autocomplete="off") 
+        button.btn.btn-primary
+          i.icon-search.icon-white
+      div
+        form.form-inline
+          legend Advanced Search
+          div.row
+            label.checkbox
+              input(type="checkbox", value="")
+              | Tossups
+            label.checkbox
+              input(type="checkbox", value="")
+              | Bonuses 
+          div.row
+            label.checkbox
+              input(type="checkbox", value="")
+              | Questions
+            label.checkbox
+              input(type="checkbox", value="")
+              | Answers
+
+      p#load This is a status thing
+      #output the text goes here
     include scripts
     script(src="/js/search.js")

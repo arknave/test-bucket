@@ -11,8 +11,8 @@ exports.parse = function(filename, encoding, pname, callback){
     if (err) throw err;
     lines = data.split("\n");
     var bonus = false;
-    var tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': [0]};
-    var bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': [0]};
+    var tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
+    var bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
     var partcntr = 1;
     
     for(line in lines){
@@ -41,7 +41,7 @@ exports.parse = function(filename, encoding, pname, callback){
           tupray.push(tup);
           //console.log(tup);
 	      // write data to request body
-          tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': [0]};
+          tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
         }
       }
       if(bonus){
@@ -63,7 +63,7 @@ exports.parse = function(filename, encoding, pname, callback){
             num++;
             bnsray.push(bns);
             //console.log(bns);
-            bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': [0]};
+            bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
             partcntr = 1;
           }
         }

@@ -7,6 +7,51 @@ $(document).ajaxComplete(function(e, jqXHR){
   $("#load").text('done loading');
 });
 
+var subjects = [
+'Undefined',
+[
+'American History',
+'European History',
+'World History'
+],
+[
+'American Literature',
+'British Literature',
+'European Literature',
+'World Literature'
+],
+[
+'Biology',
+'Chemistry',
+'Physics',
+'Mathematics',
+'Astronomy',
+'Earth Science',
+'Computer Science',
+],
+[
+'Religion',
+'Mythology',
+'Philosophy'
+],
+[
+'Classical Mustic',
+'Opera',
+'Other Music',
+'Paintings',
+'Sculpture',
+'Other Art',
+],
+[
+'Anthropology',
+'Economics',
+'Psychology',
+'Other Social Science',
+'Geography',
+'Miscellaneous',
+'TRASH'
+]
+];
 var search = function(e){
   if(!$("#searchbar").val()|| !(e.which==8) && (e.which < 48 || e.which > 91)) { return; }
   $.ajax({
@@ -43,6 +88,7 @@ var dispQ = function(q){
       a += '<div class="ans">ANSWER: '+ques.ans3+'</div>';
       break;
   }
-  a += '</div><br />';
+  a += '</div><hr />';
   $("#output").append(a);
 }
+

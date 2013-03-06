@@ -1,7 +1,36 @@
-var exec = require('child_process').exec
+var exec = require('child_process').exec;
 var path = require('path');
 var fs = require('fs');
 var http = require('http');
+
+
+function levendist(str1, i, len1, str2, j, len2) {
+  if(len1 == 0){
+    return len2;
+  }
+  if(len2 == 0) return len1;
+  var cost = 0;
+  if(str1[i] != str2[j]/* || str1[i].toLowerCase() === str2[i].toLowerCase()*/){
+     cost = 1;
+  }
+  var dist = Math.min(
+    levendist(str1, i+1,len1-1, str2,j,len2)+1, 
+    levendist(str1,i,len1,str2,j+1,len2-1)+1,
+    levendist(str1,i+1,len1-1,str2,j+1,len2-1)+cost
+  );
+  return dist;
+}
+
+matchans = function(str){
+  var n = levendist(str.substring(0,7), 0, 7, "ANSWER:", 0, 7);
+  if(n < 3){
+    var ret = [true, str, n];
+    return ret;
+  }
+  else {
+    return [false];
+  }
+}
 
 exports.parse = function(filename, encoding, pname, callback){
   var tupray = [];
@@ -22,19 +51,20 @@ exports.parse = function(filename, encoding, pname, callback){
         bonus = true;
         num = 1;
       }
-      var tossup = cur.match(/^(\d{1,2})\.?\s?([^\r\n]+)/i);
-      var answer = cur.match(/^[\s\w]*ANS?WE?[RY][\s\w]*:?\s?([^\r\n]+)$/i);
+      var tossup = cur.match(/^(\d{1,2}|TB)\.?\s?([^\r\n]+)/i);
+      var answer = matchans(cur);
       var bonuspart = cur.match(/\[10\]?\s+?([^\r\n]+)/i);
       if(!bonus){
         if(tossup !== null && tossup !== undefined){
-          tup['num'] = parseInt(tossup[1]);
+          tup['num'] = tossup[1]==="TB" ? num : parseInt(tossup[1]);
           tup['txt'] = tossup[2];
         }
-        if(answer !== null && answer !== undefined){ 
+        console.log(answer);
+        if(answer[0]){
           if(!tup['txt']) { continue; }
           tup['ans'] = answer[1]; 
-          if(tup['num'] !== num) { 
-            console.log(tup);
+          console.log(tup);
+          if(tup['num'] !== num && tup['num'] !== 'TB') { 
             return callback('Skipped tossup '+num+' somewhere in '+ pname[0]);
           }
           num++;
@@ -46,18 +76,18 @@ exports.parse = function(filename, encoding, pname, callback){
       }
       if(bonus){
         if(tossup !== null && tossup !== undefined){
-          bns['num'] = parseInt(tossup[1]);
+          bns['num'] = tossup[1]==="TB" ? num : parseInt(tossup[1]);
           bns['txt'] = tossup[2];
         }
         if(bonuspart !== null && bonuspart !== undefined){
           bns['part'+partcntr] = bonuspart[1];
         }
-        if(answer !== null && answer !== undefined){
+        if(answer[0]){
           bns['ans'+partcntr] = answer[1];
           partcntr++;
           if(partcntr === 4){
-            if(bns['num'] !== num) { 
-              console.log(bns);
+            console.log(bns);
+            if(bns['num'] !== num && bns['num'] !== 'TB') { 
               return callback('Skipped bonus '+num+' somewhere in '+ pname[0]);
             }
             num++;
@@ -87,6 +117,7 @@ exports.zipconv = function(fp, callback){
     if(path.extname(zipEntry.entryName) === '.doc'){
       zip.extractEntryTo(zipEntry.entryName, __dirname + "/queue", true, true); 
       exec('abiword -t txt ' + __dirname + '/queue/"' + zipEntry.entryName+'"', function(){
+        console.log(zipEntry.entryName +' converted '+fs.existsSync('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt'));
         exports.parse('queue/'+zipEntry.entryName.substring(0, zipEntry.entryName.length-3)+'txt', "utf8", [zipEntry.name, fp[1]], function(err, ray){
           num--;
           ret[0].push(typeof(ray)==='undefined' ? 'error' : ray[0]);

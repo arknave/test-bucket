@@ -9,66 +9,72 @@ $(document).ajaxComplete(function(e, jqXHR){
 });
 
 var subjects = [
-[
-'Uncategorized'
-],
-[
-'History',
-'American History',
-'European History',
-'World History'
-],
-[
-'Literature',
-'American Literature',
-'British Literature',
-'European Literature',
-'World Literature'
-],
-[
-'Science',
-'Biology',
-'Chemistry',
-'Physics',
-'Mathematics',
-'Astronomy',
-'Earth Science',
-'Computer Science',
-],
-[
-'RMP',
-'Religion',
-'Mythology',
-'Philosophy'
-],
-[
-'Fine Arts',
-'Classical Mustic',
-'Opera',
-'Other Music',
-'Paintings',
-'Sculpture',
-'Other Art',
-],
-[
-'Other',
-'Anthropology',
-'Economics',
-'Psychology',
-'Other Social Science',
-'Geography',
-'Miscellaneous',
-'TRASH'
-]
+  [
+    'Uncategorized'
+  ],
+  [
+    'History',
+    'American History',
+    'European History',
+    'World History'
+  ],
+  [
+    'Literature',
+    'American Literature',
+    'British Literature',
+    'European Literature',
+    'World Literature'
+  ],
+  [
+    'Science',
+    'Biology',
+    'Chemistry',
+    'Physics',
+    'Mathematics',
+    'Astronomy',
+    'Earth Science',
+    'Computer Science',
+  ],
+  [
+    'RMP',
+    'Religion',
+    'Mythology',
+    'Philosophy'
+  ],
+  [
+    'Fine Arts',
+    'Classical Mustic',
+    'Opera',
+    'Other Music',
+    'Paintings',
+    'Sculpture',
+    'Other Art',
+  ],
+  [
+    'Other',
+    'Anthropology',
+    'Economics',
+    'Psychology',
+    'Other Social Science',
+    'Geography',
+    'Miscellaneous',
+    'TRASH'
+  ]
 ];
+
 var search = function(e){
-  if(!$("#searchbar").val()|| !(e.which==8) && (e.which < 48 || e.which > 91)) { return; }
+  if(!($("#searchbar").val()) || (e.type === "keyup" && (e.which < 48 || e.which > 91 ))){
+    return; 
+  }
   $.ajax({
     url: '/database/search',
-    data: {query: $("#searchbar").val()},
+    data: {
+      query: $("#searchbar").val(),
+      from: 0,
+      size: 10,
+    },
     datatype: 'json', 
   }).done(function( data ){
-      console.log(data);
       ray = (typeof(data) === 'string') ? JSON.parse(data).hits : data.hits;
       if(ray.length === 0) { $("#output").text('nothing found'); return; }
       $('#output').text('');
@@ -77,15 +83,19 @@ var search = function(e){
 };
 
 $('#searchbar').bind('keyup', search);
-$('.form-search button').bind('click', function(e) {e.preventDefault(); search(e)});
+
+$('.form-search button').click(function(e){
+  e.preventDefault();
+  search(e);
+});
 
 var changeSubj = function(){
-  $('.btn-group').find('li').each(function(i, e){
+  $('a[tabindex="-1"]').each(function(i, e){
     var txt = $(e).text();
     if($.isNumeric(txt)){
       var num = parseInt(txt);
       var subj = subjects[Math.floor(num/10)][Math.floor(num%10)];
-      $(e).find('a').text(subj);
+      $(e).text(subj);
     }
   });
 };
@@ -97,15 +107,15 @@ var dispQ = function(q){
   a += '<div class="text">'+ques.num+'. '+ques.txt+'</div>';
   switch(q._type){
     case "tossup":
-      a += '<div class="ans">ANSWER: '+ques.ans+'</div>';
+      a += '<div class="ans">'+ques.ans+'</div>';
       break;
     case "bonus":
       a += '<div class="bonuspart">[10] '+ques.part1+'</div>';
-      a += '<div class="ans">ANSWER: '+ques.ans1+'</div>';
+      a += '<div class="ans">'+ques.ans1+'</div>';
       a += '<div class="bonuspart">[10] '+ques.part2+'</div>';
-      a += '<div class="ans">ANSWER: '+ques.ans2+'</div>';
+      a += '<div class="ans">'+ques.ans2+'</div>';
       a += '<div class="bonuspart">[10] '+ques.part3+'</div>';
-      a += '<div class="ans">ANSWER: '+ques.ans3+'</div>';
+      a += '<div class="ans">'+ques.ans3+'</div>';
       break;
   }
   a += '</div><hr />';

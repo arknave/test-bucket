@@ -15,7 +15,17 @@ exports.index = function(req, res){
 
 exports.search = function(req, res){
   console.log(req.query.query);
-  client.search({query: req.query.query}, function (err, results, fullres){
+  client.search({
+    query: {
+      query_string: { 
+        query: req.query.query, 
+        default_operator: "AND",
+      }
+    },
+    from: req.query.from,
+    size: req.query.size,
+  }, 
+  function (err, results, fullres){
     res.send(results);
   });
 };

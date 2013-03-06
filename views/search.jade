@@ -6,6 +6,11 @@ html
     link(rel="stylesheet", href="/css/search.css");
   body
     include navbar
+    button.leftarrow.navb
+      i.icon-chevron-left
+    button.rightarrow.navb
+      i.icon-chevron-right
+
     .container
       h2 Search for your dreams
       form.form-search
@@ -15,14 +20,14 @@ html
       div
         form.form-inline
           legend Advanced Search
-          div.row
+          div
             label.checkbox
               input(type="checkbox", value="")
               | Tossups
             label.checkbox
               input(type="checkbox", value="")
               | Bonuses 
-          div.row
+          div
             label.checkbox
               input(type="checkbox", value="")
               | Questions

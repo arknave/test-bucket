@@ -27,6 +27,11 @@ exports.search = function(req, res){
   {
     query: {
       query_string: { 
+        fields: [
+          ['txt', 'ans*', 'part*'],
+          ['txt', 'part*'],
+          ['ans*']
+        ][req.query.loc],
         query: req.query.query, 
         default_operator: "AND",
       }

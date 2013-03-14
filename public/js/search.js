@@ -43,6 +43,10 @@ $('.form-search button').click(function(e){
   search(e);
 });
 
+$('select').change(function(e){
+  search(e);
+});
+
 var regex = /\/search\/(\w+)?/;
 
 if(regex.test(window.location.href)){

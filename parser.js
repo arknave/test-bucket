@@ -56,10 +56,9 @@ exports.parse = function(filename, encoding, pname, callback){
       var bonuspart = cur.match(/\[10\]?\s+?([^\r\n]+)/i);
       if(!bonus){
         if(tossup !== null && tossup !== undefined){
-          tup['num'] = tossup[1]==="TB" ? num : parseInt(tossup[1]);
+          tup['num'] = tossup[1] === "TB" ? num : parseInt(tossup[1]);
           tup['txt'] = tossup[2];
         }
-        console.log(answer);
         if(answer[0]){
           if(!tup['txt']) { continue; }
           tup['ans'] = answer[1]; 

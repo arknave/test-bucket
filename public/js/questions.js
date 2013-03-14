@@ -57,13 +57,16 @@ var subjects = [
   ]
 ];
 
+var numToSubj = function(num) {
+   return subjects[Math.floor(num/10)][Math.floor(num%10)];
+};
+
 var changeSubj = function(){
   $('a[tabindex="-1"]').each(function(i, e){
     var txt = $(e).text();
     if($.isNumeric(txt)){
       var num = parseInt(txt);
-      var subj = subjects[Math.floor(num/10)][Math.floor(num%10)];
-      $(e).text(subj);
+      $(e).text(numToSubj(num));
     }
   });
 };
@@ -72,7 +75,7 @@ var changeSubj = function(){
 var dispQ = function(q){
   var a = '',
     ques = q._source;
-  a += '<div class="question"><div class="title">'+ques.tmt.name+' '+ques.tmt.year+' - '+ques.pack+' - '+ques.subj+' - '+dropDownMenu+'</div>';
+  a += '<div class="question"><div class="title">'+ques.tmt.name+' '+ques.tmt.year+' - '+ques.pack+' - '+numToSubj(ques.subj)+' - '+dropDownMenu+'</div>';
   a += '<div class="text">'+ques.num+'. '+ques.txt+'</div>';
   switch(q._type){
     case "tossup":

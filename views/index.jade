@@ -2,6 +2,7 @@
 html(lang="en")
   head
     include head
+    link(rel="stylesheet", href="/css/index.css")
     title Welcome to JAGDB!
   body
     include navbar 
@@ -9,13 +10,13 @@ html(lang="en")
       h2 JaguarDB
       #myCarousel.carousel.slide
         .carousel-inner
-          .active.item.span4
+          .active.item
             img(src="/images/bj.jpg")
-          .item.span4
+          .item
             img(src="/images/bj1.jpg")
-          .item.span4
+          .item
             img(src="/images/bj2.jpg")
-          .item.span4
+          .item
             img(src="/images/bj3.jpg")
 
         a.carousel-control.left(href="#myCarousel", data-slide="prev")&lsaquo;

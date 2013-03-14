@@ -3,6 +3,7 @@ html
   head
     title Search for your Dreams
     include head
+    link(rel="stylesheet", href="/css/slider.css");
     link(rel="stylesheet", href="/css/search.css");
   body
     include navbar
@@ -16,17 +17,25 @@ html
       div
         legend Advanced Search
         form.form.form-inline.well.well-small
-          select#typesel
+          label(for="slider") Diff: 
+          input.slider(type="text", name="slider", data-slider-value="[4, 7]", data-slider-min="1", data-slider-max="9") 
+          label(for="typesel") Type: 
+          select(name="typesel")
             option Tossups and Bonuses
             option Tossups
             option Bonuses
-          select#locsel
+          label(for="typesel") Location: 
+          select(name="locsel")
             option Questions and Answers
             option Questions 
             option Answers
+          button#subjbutton.btn Show Subjects
+        hr
+        table#table
         
       p#load This is a status thing
       #output the text goes here
     include scripts
+    script(src="/js/bootstrap-slider.js")
     script(src="/js/questions.js")
     script(src="/js/search.js")

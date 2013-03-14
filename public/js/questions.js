@@ -37,7 +37,7 @@ var subjects = [
   ],
   [
     'Fine Arts',
-    'Classical Mustic',
+    'Classical Music',
     'Opera',
     'Other Music',
     'Paintings',
@@ -57,20 +57,61 @@ var subjects = [
   ]
 ];
 
+//Converts number to subject
 var numToSubj = function(num) {
    return subjects[Math.floor(num/10)][Math.floor(num%10)];
 };
 
-var changeSubj = function(){
-  $('a[tabindex="-1"]').each(function(i, e){
-    var txt = $(e).text();
-    if($.isNumeric(txt)){
-      var num = parseInt(txt);
-      $(e).text(numToSubj(num));
+//For each menu, highlights the selected subject
+var updatemenu = function(){
+  $('.question').each(function(i,e){
+    var subj = $(e).data('q')._source.subj;
+    var menu = $(e).find('ul.dropdown-menu').eq(0);
+    if(subj === 0){
+      $(e).find('li').first().addClass('selector');
+    }
+    else {
+      var bnum = Math.floor(subj / 10),
+        snum = subj % 10;
+      menu.children('li').eq(bnum).addClass('selector');
+      menu.children('li').eq(bnum).find('li').eq(snum - 1).addClass('selector');
     }
   });
 };
 
+//Replaces the numbers in the dropdown menu with elements in the subjects array
+var renderSubj = function(){
+  $('a[tabindex="-1"]').each(function(i, e){
+    var txt = $(e).text();
+    if($.isNumeric(txt)){
+      var subj = numToSubj(parseInt(txt));
+      $(e).text(subj);
+    }
+  });
+};
+
+//Ajax event fired which updates the database each time a subject is changed
+var changeSubj = function(e){
+  var listelem = $(e.target).parent();
+  var list = listelem.parents('li.dropdown-submenu');
+  var snum = list.children('ul').children().index(listelem) + 1;
+  var bnum = list.parent().children().index(list);
+  var nsubj = 10*bnum + snum;
+
+  $.ajax({
+    url: '/database/update',
+    type: 'POST',
+    data: {
+      q: list.parents('.question').data('q'),
+      newsubj: nsubj,
+    },
+    datatype: 'json', 
+  }).done(function( data ){
+    $('li').removeClass('selector');
+    list.parents('.question').data('q')._source.subj = nsubj;
+    updatemenu();
+  });
+}
 
 var dispQ = function(q){
   var a = '',
@@ -92,5 +133,16 @@ var dispQ = function(q){
   }
   a += '</div><hr />';
   $("#output").append(a);
+  $('#output > div').last().data('q', q);
 }
+
+$('a[tabindex=-1]').on('click', function(e){
+  e.preventDefault();
+  if($(e).children().length !== 0){
+    return;
+  }
+  $.doTimeout('categorize', 500, function(){
+    changeSubj(e);
+  });
+});
 

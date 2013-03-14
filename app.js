@@ -30,7 +30,7 @@ app.get('/upload/', function(req, res){
   res.render('upload'); 
 });
 
-app.get('/search/', function(req,res){
+app.get('/search/:query?', function(req,res){
   res.render('search');
 });
 

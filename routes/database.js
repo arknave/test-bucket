@@ -34,7 +34,7 @@ exports.search = function(req, res){
     from: req.query.from,
     size: req.query.size,
   }; 
-  esc.search('questions', qryObj)
+  esc.search('questions', ['', 'tossup', 'bonus'][req.query.type], qryObj)
     .on('error', function(err){
       res.send(500, err);
     })

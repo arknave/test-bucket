@@ -14,8 +14,17 @@ html
         button.btn.btn-primary
           i.icon-search.icon-white
       div
-        form.form-inline
-          legend Advanced Search
+        legend Advanced Search
+        form.form.form-inline.well.well-small
+          select#typesel
+            option Tossups and Bonuses
+            option Tossups
+            option Bonuses
+          select#locsel
+            option Questions and Answers
+            option Questions 
+            option Answers
+        
       p#load This is a status thing
       #output the text goes here
     include scripts

@@ -10,7 +10,7 @@ function levendist(str1, i, len1, str2, j, len2) {
   }
   if(len2 == 0) return len1;
   var cost = 0;
-  if(str1[i] != str2[j]/* || str1[i].toLowerCase() === str2[i].toLowerCase()*/){
+  if(str1[i] != str2[j]){
      cost = 1;
   }
   var dist = Math.min(

@@ -1,21 +1,30 @@
-var elastical = require('elastical'),
-  client = new elastical.Client();
+ElasticSearchClient = require('elasticsearchclient');
+
+var servopts = {
+  host: 'localhost',
+  port: 9200,
+  secure: false
+};
+
+var esc = new ElasticSearchClient(servopts);
 
 exports.index = function(req, res){
   var data = JSON.parse(req.body.data);
   data.forEach(function(d){
     d.forEach(function(f){
-       client.index('questions', req.params.type, f, function(err, res){
-        if(err) throw err;
-      }); 
+      esc.index('questions', req.params.type, f)
+        .on('error', function(err) {
+          throw err;
+        })
+        .exec(); 
     });
   });
   res.send('mission complete');
 };
 
 exports.search = function(req, res){
-  console.log(req.query.query);
-  client.search({
+  var qryObj = 
+  {
     query: {
       query_string: { 
         query: req.query.query, 
@@ -24,8 +33,13 @@ exports.search = function(req, res){
     },
     from: req.query.from,
     size: req.query.size,
-  }, 
-  function (err, results, fullres){
-    res.send(results);
-  });
+  }; 
+  esc.search('questions', qryObj)
+    .on('error', function(err){
+      res.send(500, err);
+    })
+    .on('data', function(data){
+      res.send(data);
+    })
+    .exec();
 };

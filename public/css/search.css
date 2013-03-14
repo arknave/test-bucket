@@ -2,37 +2,6 @@
   margin: 0px 5px;
 }
 
-.navb {
-  position: fixed;
-
-  width: 20px;
-  height: 100%;
-  top: 42px;
-
-  background-color: rgba(192, 192, 192, 0);
-  border: 1px rgba(192, 192, 192, .5) solid;
-  
-  webkit-border-radius: 4px;
-  moz-border-radius: 4px;
-  border-radius: 4px;
-}
-
-.navb:hover {
-  background-color: rgba(192, 192, 192, .3);
-  border: 1px #CCC solid;
-}
-
-.navb i {
-  opacity: 1;
-}
-
-.leftarrow {
-}
-
-.rightarrow {
-  right: 0px;
-}
-
 .selector {
   text-decoration: none;
   background-color: #0081c2;

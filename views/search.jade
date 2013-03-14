@@ -6,10 +6,6 @@ html
     link(rel="stylesheet", href="/css/search.css");
   body
     include navbar
-    button.leftarrow.navb
-      i.icon-chevron-left
-    button.rightarrow.navb
-      i.icon-chevron-right
 
     .container
       h2 Search for your dreams
@@ -20,22 +16,8 @@ html
       div
         form.form-inline
           legend Advanced Search
-          div
-            label.checkbox
-              input(type="checkbox", value="")
-              | Tossups
-            label.checkbox
-              input(type="checkbox", value="")
-              | Bonuses 
-          div
-            label.checkbox
-              input(type="checkbox", value="")
-              | Questions
-            label.checkbox
-              input(type="checkbox", value="")
-              | Answers
-        
       p#load This is a status thing
       #output the text goes here
     include scripts
+    script(src="/js/questions.js")
     script(src="/js/search.js")

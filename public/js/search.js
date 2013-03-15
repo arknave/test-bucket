@@ -102,7 +102,7 @@ $('input[name="slider"]').slider({value: [4, 7]})
 var regex = /\/search\/(.*)$/;
 if(regex.test(window.location.href)){
   var thing = regex.exec(window.location.href)[1];
-  $('#searchbar').val(thing.replace(/%20/g, ' '));
+  $('#searchbar').val(thing.split('%20').join(' ').replace(/[^a-zA-Z0-9]/g, ''));
   $('.form-search button').click(); 
 }
 

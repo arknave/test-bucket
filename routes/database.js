@@ -52,8 +52,9 @@ exports.search = function(req, res){
       size: req.query.size,
     }
   };
-  if (req.query.subj.length > 0) {
-    qryObj.query.filter.and.push({terms: {subj: req.query.subj}});
+  
+  if (req.query.subj.length > 1) {
+    qryObj.query.filtered.filter.and.push({terms: {subj: req.query.subj}});
   }
   esc.search('questions', ['', 'tossup', 'bonus'][req.query.type], qryObj)
     .on('error', function(err){

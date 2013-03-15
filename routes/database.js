@@ -65,3 +65,7 @@ exports.search = function(req, res){
     })
     .exec();
 };
+
+exports.update = function(req, res){
+
+}

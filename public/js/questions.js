@@ -97,7 +97,8 @@ var changeSubj = function(e){
   var snum = list.children('ul').children().index(listelem) + 1;
   var bnum = list.parent().children().index(list);
   var nsubj = 10*bnum + snum;
-
+  console.log(list.parents('.question').data('q'));
+  /*
   $.ajax({
     url: '/database/update',
     type: 'POST',
@@ -111,6 +112,7 @@ var changeSubj = function(e){
     list.parents('.question').data('q')._source.subj = nsubj;
     updatemenu();
   });
+  */
 }
 
 var dispQ = function(q){
@@ -134,15 +136,15 @@ var dispQ = function(q){
   a += '</div><hr />';
   $("#output").append(a);
   $('#output > div').last().data('q', q);
+  $('a[tabindex="-1"]').on('click', function(e){
+    e.preventDefault();
+    if($(e.target).parent().hasClass('dropdown-submenu')){
+      return;
+    }
+    $.doTimeout('categorize', 500, function(){
+      changeSubj(e);
+    });
+  });
 }
 
-$('a[tabindex=-1]').on('click', function(e){
-  e.preventDefault();
-  if($(e).children().length !== 0){
-    return;
-  }
-  $.doTimeout('categorize', 500, function(){
-    changeSubj(e);
-  });
-});
 

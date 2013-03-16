@@ -67,5 +67,19 @@ exports.search = function(req, res){
 };
 
 exports.update = function(req, res){
-
+  var q = req.body.q._source;
+  q.subj = req.body.newsubj;
+  esc.update('questions', req.body.q._type, req.body.q._id, {
+    script: "ctx._source.subj = ns",
+    params: {
+      ns: req.body.newsubj,
+    }
+  })
+    .on('error', function(err){
+      res.send(500, err);
+    })
+    .on('data', function(data){
+      res.send(data);
+    })
+    .exec();
 }

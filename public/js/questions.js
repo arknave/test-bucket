@@ -97,8 +97,7 @@ var changeSubj = function(e){
   var snum = list.children('ul').children().index(listelem) + 1;
   var bnum = list.parent().children().index(list);
   var nsubj = 10*bnum + snum;
-  console.log(list.parents('.question').data('q'));
-  /*
+  
   $.ajax({
     url: '/database/update',
     type: 'POST',
@@ -112,7 +111,6 @@ var changeSubj = function(e){
     list.parents('.question').data('q')._source.subj = nsubj;
     updatemenu();
   });
-  */
 }
 
 var dispQ = function(q){

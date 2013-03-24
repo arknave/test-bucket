@@ -5,12 +5,12 @@ var http = require('http');
 
 
 function levendist(str1, i, len1, str2, j, len2) {
-  if(len1 == 0){
+  if(len1 === 0){
     return len2;
   }
-  if(len2 == 0) return len1;
+  if(len2 === 0) return len1;
   var cost = 0;
-  if(str1[i] != str2[j]){
+  if(str1[i] !== str2[j]){
      cost = 1;
   }
   var dist = Math.min(
@@ -32,6 +32,7 @@ matchans = function(str){
   }
 }
 
+/*
 exports.parse = function(filename, encoding, pname, callback){
   var tupray = [];
   var bnsray = [];
@@ -42,7 +43,7 @@ exports.parse = function(filename, encoding, pname, callback){
     var bonus = false;
     var tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
     var bns = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
-    var partcntr = 1;
+    var  partcntr = 1;
     
     for(line in lines){
       var cur = lines[line];
@@ -69,7 +70,7 @@ exports.parse = function(filename, encoding, pname, callback){
           num++;
           tupray.push(tup);
           //console.log(tup);
-	      // write data to request body
+          //write data to request body
           tup = {'pack': pname[0], 'tmt' : pname[1], 'subj': 0};
         }
       }
@@ -101,6 +102,145 @@ exports.parse = function(filename, encoding, pname, callback){
     if(callback && typeof(callback) === 'function'){
         callback(null, [tupray, bnsray]);
       }
+  });
+}*/
+
+var questionHandler = function(pname){
+  this.type = 'tossup'
+  this.state = 'waiting'; // waiting, text, or answer
+  this.txtregex = /^(\d{1,2})\.?\s?(.+)/i;
+  this.bnsregex = /\[10\]?\s+?([^\r\n]+)/i;
+  this.part = 1;
+  this.reset = function(){
+    this.ques = {
+      pack: pname[0],
+      tmt: pname[1],
+      subj: 0,
+    };
+  }
+  
+  this.reset();
+  this.genanswer = function() {
+    switch(this.type){
+      case 'tossup':
+        var pos = this.ques.txt.toUpperCase().indexOf('ANSWER');
+        if(pos > -1){
+          this.ques.ans = this.ques.txt.substring(pos).trim();
+          this.ques.txt = this.ques.txt.substring(0, pos).trim();
+        }
+        break;
+      
+      
+      case 'bonus':
+        for(var i=1;i<=3;i++){
+          var p = 'part'+i;
+          var a = 'ans'+i;
+          var pos = this.ques[p].toUpperCase().indexOf('ANSWER');
+          if(pos > -1){
+            this.ques[a] = this.ques[p].substring(pos).trim();
+            this.ques[p] = this.ques[p].substring(0, pos).trim();
+          }
+        }
+    }
+  }
+  
+  this.handleNewLine = function() {
+    switch(this.state){
+      case('waiting'):
+        return false;
+      
+      default:
+        switch(this.type){
+        
+          case 'tossup':
+          if(!this.ques.hasOwnProperty('ans')){
+            this.genanswer();
+            if(!this.ques.hasOwnProperty('ans')){
+              throw 'Could not find answer: ' + JSON.stringify(ques);
+            }
+          }
+          break;
+          
+          case 'bonus':
+          if(!this.ques.hasOwnProperty('ans'+this.part)){
+            this.genanswer();
+            if(!this.ques.hasOwnProperty('ans'+this.part)){
+              throw 'Could not find answer: ' + JSON.stringify(ques);
+            }
+          }
+          break;
+        }
+    }
+    
+    this.state = 'waiting';
+    var ret = this.ques;
+    this.reset();
+    return ret;
+  }
+  
+  this.trybns = function(line){
+    var bnsmatch = this.bnsregex.exec(line);
+    if(this.type == 'bonus' && bnsmatch !== null){
+      this.ques['part'+this.part] = bnsmatch[1];
+      console.log(this.ques);
+      this.part++;
+      this.state = 'answer';
+      
+    }
+  }
+  
+  this.handle = function(line) {
+    var tupmatch = this.txtregex.exec(line);
+    var ansmatch = matchans(line);
+    //console.log(this.state);
+    switch(this.state){
+      case 'waiting':
+        if(tupmatch !== null){
+          this.state = 'text';
+          this.ques.num = tupmatch[1];
+          this.ques.txt = tupmatch[2].trim();
+          return true;
+        }
+      case 'text':
+        this.trybns(line);
+        if(ansmatch[0]){
+          if(this.state === 'waiting'){
+            throw 'Found answer : \n'+ansmatch[1]+' \nbefore question';
+          }
+          this.state = 'answer';
+          this.ques.ans = ansmatch[1];
+          return true;
+        }
+        if(!(line.trim() === '') && this.ques.hasOwnProperty('txt')){
+          this.ques.txt += line;
+        }
+      case 'part':
+        this.trybns(line);
+      case 'answer':
+        if(line.trim() === ''){
+	        return this.handleNewLine();
+        }
+      default:
+        if(line.search(/bonus/i) !== -1){
+          this.type = 'bonus';
+          return 'bonus';
+        }
+    }
+    return false;
+  }
+}
+
+//Takes in file, encoding, packet name, and callback
+//Acts as a state machine, passes lines to depending on state
+exports.parse = function(file, enc, pname, cb){
+  fs.readFile(__dirname + '/' + file, enc, function(err, data){
+    if (err) throw err;
+    lines = data.split('\n');
+    var qh = new questionHandler(pname);
+    lines.forEach(function(cur){
+      var resp = qh.handle(cur);
+      //if (typeof resp === 'object') console.log(resp);
+    });
   });
 }
 
@@ -139,3 +279,5 @@ exports.zipconv = function(fp, callback){
     }
   });
 }
+
+exports.parse('queue/Claremont A.txt', 'utf8', ['Claremont A', {tmt: 'ACF Fall', diff: 5, year: 2011}]);

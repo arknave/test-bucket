@@ -121,6 +121,8 @@ $('td').on('click', function(){
   if($(this).hasClass('disabled')){
     return;
   }
+  //check if dude thing face
+  var index = $(this)
   $(this).toggleClass('highlight');
 });
 

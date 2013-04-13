@@ -7,7 +7,10 @@ html
     link(rel="stylesheet", href="/css/search.css");
   body
     include navbar
-
+    button.leftarrow.navb
+      i.icon-chevron-left
+    button.rightarrow.navb
+      i.icon-chevron-right
     .container
       h2 Search for your dreams
       form.form-search
@@ -34,7 +37,10 @@ html
         table#table.hide
         
       p#load This is a status thing
+      #pos 0
+      #tot 0
       #output the text goes here
+      
     include scripts
     script(src="/js/bootstrap-slider.js")
     script(src="/js/questions.js")

@@ -7,6 +7,41 @@ $(document).ajaxComplete(function(e, jqXHR){
   $("#load").text('done loading');
 });
 
+//Object that handles page navigation
+function searchman(start, total){
+  this.pos = start;
+  this.total = total;
+  var disp = function(p, t){
+    $('#pos').text(''+(p+1)+'-'+Math.min(p+11, t));
+    $('#tot').text(t);
+  }
+  disp(this.pos, this.total);
+  this.prev = function(){
+    if(this.pos - 10 >= 0){
+      this.pos -= 10;
+      //disp(this.pos, this.total);
+      search(null, this.pos);
+    }
+  }
+  this.next = function(){
+    if(this.pos + 10 < total){
+      this.pos += 10;
+      //disp(this.pos, this.total);
+      search(null, this.pos);
+    }
+  }
+};
+
+window.searchbot = new searchman(0, 0);
+
+$('.leftarrow').click(function(){
+  searchbot.prev();
+});
+
+$('.rightarrow').click(function(){
+  searchbot.next();
+});
+
 //Generates the subject matrix
 var ROW = 9;
 var COL = 6;
@@ -39,6 +74,7 @@ $('table').find('td').each(function(i, e){
 var search = function(e, f){
   $.doTimeout('search', 500, function(){
     if(e && (e.type === "keyup" && ((e.which !== 8 && e.which < 48) || e.which > 91 ))){
+      console.log('no');
       return; 
     }
     if(!$('#searchbar').val()){
@@ -70,7 +106,7 @@ var search = function(e, f){
         data = (typeof(data) === 'string') ? JSON.parse(data).hits : data.hits;
         var ray = data.hits;
         if(ray.length === 0) { $("#output").text('nothing found'); return; }
-
+        searchbot= new searchman(f, data.total);
         ray.forEach(dispQ);
         renderSubj();
         updatemenu();

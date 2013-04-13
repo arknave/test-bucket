@@ -10,7 +10,7 @@ $('#upzip').submit(function(e){
   formdata.append('zip', thefile);
   $.ajax({
     type: 'POST',
-    url: '/upload',
+    url: '/upload/',
     data: formdata,
     processData: false,
     contentType: false,
@@ -28,7 +28,7 @@ $('#upzip').submit(function(e){
       for(var i=data[0].length;i>1;i--){
         $('.pagination ul li.active').after('<li><a href="#">'+i+'</a></li>');
       }
-      p = new Page(1, data[0].length, data[0], data[1]);
+      p = new Page(1, data.length, data, []);
       $('.pagination li').bind('click', handleClick);
       $('#review textarea').first().val(JSON.stringify(data[0][0]));
       $('#review textarea').last().val(JSON.stringify(data[1][0]));
@@ -47,14 +47,14 @@ $('#review').submit(function(e){
   }).done(function(){
     alert('put tossups into database');
   });
-  $.ajax({
+  /*$.ajax({
     type: 'POST',
     dataType: 'json',
     url: '/database/bonus/index',
     data: {'data': JSON.stringify(p.bonus)},
   }).done(function(){
     alert('put bonuses into database');
-  });
+  });*/
 });
 
 //Pagination code

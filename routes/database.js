@@ -48,15 +48,15 @@ exports.search = function(req, res){
           ]  
         },
       },
-      from: req.query.from,
-      size: req.query.size,
-    }
+    },
+    from: req.query.from,
+    size: req.query.size,
   };
-  
+  console.log(req.query.from);  
   if (req.query.subj.length > 1) {
     qryObj.query.filtered.filter.and.push({terms: {subj: req.query.subj}});
   }
-  esc.search('questions', ['', 'tossup', 'bonus'][req.query.type], qryObj)
+  esc.search('qbdb', ['', 'tossup', 'bonus'][req.query.type], qryObj)
     .on('error', function(err){
       res.send(500, err);
     })
@@ -69,7 +69,7 @@ exports.search = function(req, res){
 exports.update = function(req, res){
   var q = req.body.q._source;
   q.subj = req.body.newsubj;
-  esc.update('questions', req.body.q._type, req.body.q._id, {
+  esc.update('qbdb', req.body.q._type, req.body.q._id, {
     script: "ctx._source.subj = ns",
     params: {
       ns: req.body.newsubj,

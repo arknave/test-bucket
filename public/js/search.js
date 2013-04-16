@@ -77,6 +77,7 @@ var search = function(e, f){
       console.log('no');
       return; 
     }
+    f = f || 0
     if(!$('#searchbar').val()){
       $('#searchbar').val('*');
     }
@@ -92,7 +93,7 @@ var search = function(e, f){
       url: '/database/search',
       data: {
         query: $("#searchbar").val(),
-        from: f || 0,
+        from: f,
         size: 10,
         type: $('select[name="typesel"]').prop('selectedIndex'),
         loc: $('select[name="locsel"]').prop('selectedIndex'),

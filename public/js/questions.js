@@ -120,7 +120,7 @@ var dispQ = function(q){
   a += '<div class="text">'+ques.num+'. '+ques.txt+'</div>';
   switch(q._type){
     case "tossup":
-      a += '<div class="ans">'+ques.ans+'</div>';
+      a += '<div class="ans">ANSWER: '+ques.ans+'</div>';
       break;
     case "bonus":
       a += '<div class="bonuspart">[10] '+ques.part1+'</div>';

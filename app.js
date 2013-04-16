@@ -1,10 +1,8 @@
 var express = require('express');
-var http = require('http');
 var path = require('path');
 var dbroute = require('./routes/database');
 var app = express();
-
-require('jade');
+var jade = require('jade');
 app.set('view engine', 'jade');
 app.set('view options', {layout: false});
 app.configure(function(){

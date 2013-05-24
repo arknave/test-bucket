@@ -35,6 +35,7 @@ app.get('/search/:query?', function(req,res){
 app.post('/database/:type/index', dbroute.index);
 app.get('/database/search', dbroute.search);
 app.post('/database/update', dbroute.update);
+app.get('/database/text', dbroute.text);
 
 var port = process.env.PORT || 8080;
 

@@ -1,5 +1,5 @@
 ElasticSearchClient = require('elasticsearchclient');
-
+var fs = require('fs');
 var servopts = {
   host: 'localhost',
   port: 9200,
@@ -22,7 +22,12 @@ exports.index = function(req, res){
   res.send('mission complete');
 };
 
-exports.search = function(req, res){
+var search = function(req, res, cb){
+  var diff = [
+    req.query.diff ? req.query.diff[0] : 1,
+    req.query.diff ? req.query.diff[1] : 9,
+  ];
+  var query = req.query.query || "*";
   var qryObj = 
   {
     query : {
@@ -33,8 +38,8 @@ exports.search = function(req, res){
               ['txt', 'ans*', 'part*'],
               ['txt', 'part*'],
               ['ans*']
-            ][req.query.loc],
-            query: req.query.query, 
+            ][req.query.loc || 0],
+            query: query, 
             default_operator: "AND",
             }
         },
@@ -42,29 +47,38 @@ exports.search = function(req, res){
           and : [
             {  
               range: {
-                "tmt.diff" : {gte: req.query.diff[0], lte: req.query.diff[1]}
+                "tmt.diff" : {gte: diff[0], lte: diff[1]}
               }
             },
-          ]  
+          ] 
         },
       },
     },
-    from: req.query.from,
-    size: req.query.size,
+    from: req.query.from || 0,
+    size: req.query.size || 10,
   };
-  console.log(req.query.from);  
-  if (req.query.subj.length > 1) {
-    qryObj.query.filtered.filter.and.push({terms: {subj: req.query.subj}});
+  var subj = req.query.subj || [];
+  if (subj.length > 1) {
+    qryObj.query.filtered.filter.and.push({terms: {subj: subj}});
   }
-  esc.search('qbdb', ['', 'tossup', 'bonus'][req.query.type], qryObj)
+  esc.search('qbdb', ['', 'tossup', 'bonus'][req.query.type || 0], qryObj)
     .on('error', function(err){
-      res.send(500, err);
+      cb(err);
     })
     .on('data', function(data){
-      res.send(data);
+      cb(null, data);
     })
     .exec();
 };
+
+exports.search = function(req, res){
+  search(req, res, function(err, data){
+    if(err !== null){
+      res.send(500, err);
+    }
+    res.json(data);
+  });
+}
 
 exports.update = function(req, res){
   var q = req.body.q._source;
@@ -82,4 +96,31 @@ exports.update = function(req, res){
       res.send(data);
     })
     .exec();
+}
+
+exports.text = function(req, res){
+  req.query.from = 0;
+  req.query.size = 40000;
+  search(req, res, function(err, data){
+    if(err !== null){
+      res.send(500, err);
+    }
+    data = (typeof data === 'string') ? JSON.parse(data) : data;
+    console.log(data);
+    if(data.status){
+      res.send(500, data);
+      return;
+    }
+    var stream = fs.createWriteStream('results.txt');
+    for(tup in data.hits.hits){
+      console.log(tup);
+      ques = data.hits.hits[tup]._source;
+      stream.write(ques.tmt.name+" - " + ques.tmt.year +" - "+ques.pack+"\n");
+      stream.write(ques.txt+"\n");
+      stream.write(ques.ans+"\n\n");
+    }
+    stream.end('', 'utf8', function(){
+      res.download('results.txt');
+    });
+  });
 }

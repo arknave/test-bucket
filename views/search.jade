@@ -32,12 +32,18 @@ html
             option Questions and Answers
             option Questions 
             option Answers
+          label(for="numques") #of tossups: 
+          select(name="numques")
+            option 10
+            option 50
+            option 100
           button#subjbutton.btn Show Subjects
         hr
         table#table.hide
         
       p#load This is a status thing
-      span displaying 
+      a#txt(href='#') Download results as text file (Coming soon!)
+      div displaying 
       span#pos 0
       |  of 
       span#tot 0

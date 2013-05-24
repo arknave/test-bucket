@@ -8,31 +8,31 @@ $(document).ajaxComplete(function(e, jqXHR){
 });
 
 //Object that handles page navigation
-function searchman(start, total){
+function searchman(start, total, size){
   this.pos = start;
   this.total = total;
   var disp = function(p, t){
-    $('#pos').text(''+(p+1)+'-'+Math.min(p+11, t));
+    $('#pos').text(''+(p+1)+'-'+Math.min(p+size+1, t));
     $('#tot').text(t);
   }
   disp(this.pos, this.total);
   this.prev = function(){
-    if(this.pos - 10 >= 0){
-      this.pos -= 10;
+    if(this.pos - size >= 0){
+      this.pos -= size;
       //disp(this.pos, this.total);
       search(null, this.pos);
     }
   }
   this.next = function(){
-    if(this.pos + 10 < total){
-      this.pos += 10;
+    if(this.pos + size < total){
+      this.pos += size;
       //disp(this.pos, this.total);
       search(null, this.pos);
     }
   }
 };
 
-window.searchbot = new searchman(0, 0);
+window.searchbot = new searchman(0, 0, 10);
 
 $('.leftarrow').click(function(){
   searchbot.prev();
@@ -71,13 +71,9 @@ $('table').find('td').each(function(i, e){
   }
 });
 
-var search = function(e, f){
+var search = function(e, f, txt){
   $.doTimeout('search', 500, function(){
-    if(e && (e.type === "keyup" && ((e.which !== 8 && e.which < 48) || e.which > 91 ))){
-      console.log('no');
-      return; 
-    }
-    f = f || 0
+    f = f || 0;
     if(!$('#searchbar').val()){
       $('#searchbar').val('*');
     }
@@ -90,11 +86,11 @@ var search = function(e, f){
       }
     };
     $.ajax({
-      url: '/database/search',
+      url: txt ? '/database/text/' : '/database/search',
       data: {
         query: $("#searchbar").val(),
         from: f,
-        size: 10,
+        size: parseInt($('select[name="numques"]').val(), 10) || 10,
         type: $('select[name="typesel"]').prop('selectedIndex'),
         loc: $('select[name="locsel"]').prop('selectedIndex'),
         diff: $('input[name="slider"]').data().slider.value,
@@ -103,11 +99,14 @@ var search = function(e, f){
       datatype: 'json', 
     })
       .done(function( data ){
+        if(typeof txt !== 'undefined'){
+          return;
+        }
         $('#output').text('');
         data = (typeof(data) === 'string') ? JSON.parse(data).hits : data.hits;
         var ray = data.hits;
         if(ray.length === 0) { $("#output").text('nothing found'); return; }
-        searchbot= new searchman(f, data.total);
+        searchbot= new searchman(f, data.total, parseInt($('select[name="numques"]').val(), 10));
         ray.forEach(dispQ);
         renderSubj();
         updatemenu();
@@ -128,7 +127,6 @@ $('.form-search button').click(function(e){
 $('select').change(function(e){
   search(e);
 });
-
 
 $('input[name="slider"]').slider({value: [4, 7]})
   .on('slideStop', function(e){
@@ -158,7 +156,6 @@ $('td').on('click', function(){
   if($(this).hasClass('disabled')){
     return;
   }
-  //check if dude thing face
   var index = $(this)
   $(this).toggleClass('highlight');
 });
@@ -179,4 +176,7 @@ $('th').on('click', function(){
     });
   });
   $(this).toggleClass('highlight');
+});
+$('#txt').click(function(e){
+  search(e, 0, 'txt');
 });

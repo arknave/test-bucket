@@ -7,26 +7,25 @@ function levendist(str1, i, len1, str2, j, len2) {
   if(len1 === 0){
     return len2;
   }
-  if(len2 === 0) return len1;
-  var cost = 0;
-  if(str1[i] !== str2[j]){
-     cost = 1;
+  if(len2 === 0) {
+    return len1;
   }
+  
+  var cost = str1[i] === str2[j] ? 0 : 1;
+  
   var dist = Math.min(
-    levendist(str1, i+1,len1-1, str2,j,len2)+1, 
-    levendist(str1,i,len1,str2,j+1,len2-1)+1,
-    levendist(str1,i+1,len1-1,str2,j+1,len2-1)+cost
+    levendist(str1, i + 1, len1 - 1, str2, j, len2) + 1,
+    levendist(str1, i, len1, str2, j + 1,len2-1) + 1,
+    levendist(str1, i + 1, len1 - 1, str2, j + 1, len2 - 1) + cost
   );
   return dist;
 }
 
-matchans = function(str){
-  var n = levendist(str.substring(0,7), 0, 7, "ANSWER:", 0, 7);
-  if(n < 3){
-    var ret = [true, str, n];
-    return ret;
-  }
-  else {
+function matchans(str) {
+  var n = levendist(str.substring(0,7).toUpperCase(), 0, 7, "ANSWER:", 0, 7);
+  if (n < 3) {
+    return [true, str, n];
+  } else {
     return [false];
   }
 }
